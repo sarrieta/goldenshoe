@@ -63,16 +63,16 @@ class Member(User):
 # The Hobby models provides an intermediate model for
 # the 'hobbies' ManyToMany relationship between Members
 # Pre-defined hobbies to be entered into the database
+
 class Hobby(models.Model):
     user = models.ForeignKey(
         to=Member,
         related_name='hobbies',
         on_delete=models.CASCADE
     )
-    # This hobby x take by x amount of users
-    # x(user1, user2, user3, user4)
 
     # Given hobby
+    # Tennis, basketball, running, gym etc
     hobby = models.CharField(max_length=4096)
 
     def __str__(self):
