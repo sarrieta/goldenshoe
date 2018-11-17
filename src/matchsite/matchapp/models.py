@@ -10,13 +10,6 @@ class Profile(models.Model):
     )
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     dob = models.DateField(max_length=8)
-    # Member can choose from a given list of hobbies
-    hobby = models.ForeignKey(
-        to = 'Hobby',
-        blank = True,
-        null = True,
-        on_delete=models.CASCADE
-    )
 
     # True if this profile belongs to a Member
     @property
