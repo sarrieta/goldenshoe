@@ -24,6 +24,19 @@ class Profile(models.Model):
     def __str__(self):
         return self.text + ' (' + self.member_check + ')'
 
+# The Hobby models provides an intermediate model for
+# the 'hobbies' ManyToMany relationship between Members
+# Pre-defined hobbies to be entered into the database
+
+class Hobby(models.Model):
+    # Given hobby [LIST]
+    # Tennis, basketball, running, gym etc
+    hobby = models.CharField(max_length=4096)
+
+    def __str__(self):
+        return self.user.username  
+
+
 # Django's User model allows for Members to inherit
 # username and password 
 
@@ -35,7 +48,7 @@ class Member(User):
         on_delete=models.CASCADE
     )
     hobbies = models.ManyToManyField(
-        to='self',
+        to=Hobby,
         blank=True,
         symmetrical=False,
         related_name='related_to'
@@ -49,14 +62,4 @@ class Member(User):
     def __str__(self):
         return self.username
 
-# The Hobby models provides an intermediate model for
-# the 'hobbies' ManyToMany relationship between Members
-# Pre-defined hobbies to be entered into the database
-
-class Hobby(models.Model):
-    # Given hobby [LIST]
-    # Tennis, basketball, running, gym etc
-    hobby = models.CharField(max_length=4096)
-
-    def __str__(self):
-        return self.user.username       
+     
