@@ -1,5 +1,10 @@
 Web Programming coursework 
 
+admin details:
+user: admin
+password: useruser
+
+
 Group: Four students
 Mark: 15%
 Deadline: Friday 14 December
