@@ -38,7 +38,6 @@ class Member(User):
         to='self',
         blank=True,
         symmetrical=False,
-        through='Hobby',
         related_name='related_to'
     )
 
