@@ -1,16 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from mainapp.models import Member, Profile, Hobby
-
-
-
-#user logged in
-def loggedin(request):
-	return HttpResponse("user logged in")
+from django.http import HttpResponse, Http404
+from matchapp.models import Member, Profile, Hobby
+from django.contrib.auth.hashers import make_password
 
 #should render login page but also include a signup button
 def index(request):
     return HttpResponse("Login page")
+
+#user logged in
+def loggedin(request):
+	return HttpResponse("user logged in")
 
 #should render the signup page
 def signup(request):
@@ -28,7 +27,7 @@ def register(request):
 			user.save()
 
 		except: 
-			Http404("Username " + u "is already taken")
+			Http404("Username " + u + "is already taken")
 
 		return HttpResponse("the user has been registered rendered page")
 
@@ -45,20 +44,20 @@ def logout(request):
 
 #shows another page with users that have similar interests 
 #order of most common hobbies first
-@loggedin
-def similarHobbies(request):
-	return HttpResponse("return list of people with similar hobbies")
+#@loggedin
+#def similarHobbies(request):
+#	return HttpResponse("return list of people with similar hobbies")
 
 #filter button on similarHobbies page which generates
-@loggedin
-def filter(request):
-	return HttpResponse("filter by gender and age using Ajax")
+#@loggedin
+#def filter(request):
+#	return HttpResponse("filter by gender and age using Ajax")
 
 #user profile edit page
-@loggedin
-def profile(request):
-	return HttpResponse("user should be able to edit page")
+#@loggedin
+#def profile(request):
+#	return HttpResponse("user should be able to edit page")
 
-@loggedin
-def uploadImage(request):
-	return HttpResponse("user should be able to upload an image")
+#@loggedin
+#def upload_Image(request):
+#	return HttpResponse("user should be able to upload an image")
