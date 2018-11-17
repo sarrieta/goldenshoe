@@ -45,19 +45,19 @@ def logout(request):
 #shows another page with users that have similar interests 
 #order of most common hobbies first
 #@loggedin
-#def similarHobbies(request):
-#	return HttpResponse("return list of people with similar hobbies")
+def similarHobbies(request):
+	return HttpResponse("return list of people with similar hobbies")
 
 #filter button on similarHobbies page which generates
 #@loggedin
-#def filter(request):
-#	return HttpResponse("filter by gender and age using Ajax")
+def filter(request):
+	return HttpResponse("filter by gender and age using Ajax")
 
 #user profile edit page
 #@loggedin
-#def profile(request):
-#	return HttpResponse("user should be able to edit page")
+def profile(request):
+	return HttpResponse("user should be able to edit page")
 
 #@loggedin
-#def upload_Image(request):
-#	return HttpResponse("user should be able to upload an image")
+def upload_Image(request):
+	return HttpResponse("user should be able to upload an image")
