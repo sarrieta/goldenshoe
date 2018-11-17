@@ -1,13 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-"""
-	Profile image,	
-    email,	
-    gender,	
-    date of	birth, 
-    and	a list	of	hobbies.
-"""
 class Profile(models.Model):
     image = models.ImageField(upload_to='profile_images')
     email = models.EmailField()
@@ -17,8 +10,6 @@ class Profile(models.Model):
     )
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     dob = models.DateField(max_length=8)
-    # List of hobbies in text form or na?
-    text = models.CharField(max_length=4096)
 
     # True if this profile belongs to a Member
     @property
@@ -33,9 +24,21 @@ class Profile(models.Model):
     def __str__(self):
         return self.text + ' (' + self.member_check + ')'
 
-# Django's User model already has username and password
-# both of which are required fields, so Member inherits
-# these fields
+# The Hobby models provides an intermediate model for
+# the 'hobbies' ManyToMany relationship between Members
+# Pre-defined hobbies to be entered into the database
+
+class Hobby(models.Model):
+    # Given hobby [LIST]
+    # Tennis, basketball, running, gym etc
+    hobby = models.CharField(max_length=4096)
+
+    def __str__(self):
+        return self.user.username  
+
+
+# Django's User model allows for Members to inherit
+# username and password 
 
 class Member(User):
     profile = models.OneToOneField(
@@ -45,10 +48,9 @@ class Member(User):
         on_delete=models.CASCADE
     )
     hobbies = models.ManyToManyField(
-        to='self',
+        to=Hobby,
         blank=True,
         symmetrical=False,
-        through='Hobby',
         related_name='related_to'
     )
 
@@ -60,21 +62,4 @@ class Member(User):
     def __str__(self):
         return self.username
 
-# The Hobby models provides an intermediate model for
-# the 'hobbies' ManyToMany relationship between Members
-# Pre-defined hobbies to be entered into the database
-
-class Hobby(models.Model):
-    user = models.ForeignKey(
-        to=Member,
-        related_name='hobbies',
-        on_delete=models.CASCADE
-    )
-
-    # Given hobby
-    # Tennis, basketball, running, gym etc
-    hobby = models.CharField(max_length=4096)
-
-    def __str__(self):
-        return self.user.username       
-
+     

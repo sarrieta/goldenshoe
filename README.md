@@ -1,5 +1,10 @@
 Web Programming coursework 
 
+admin details:
+user: admin
+password: useruser
+
+
 Group: Four students
 Mark: 15%
 Deadline: Friday 14 December
@@ -32,10 +37,8 @@ Have the database ready: 16th Novemeber
 Creating users and profile and hobbies: 19th November
 Have base defined for the html/css/bootstrap: 22nd Novemeber 
 
->
-
   
-1. Users	can	create	an	account	on	the	site	and	login.  (Sergio) + Backend mandem 
+1. Users	can	create	an	account	on	the	site	and	login. (Backend mandem)
 
 2. The	user’s	proFile	should	contain	(at	least):	proFile	image,	email,	gender,	date	of	birth,	
 and	a	list	of	hobbies.	(Anas) (REGEX + DATABASE)
