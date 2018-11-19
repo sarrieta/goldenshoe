@@ -18,18 +18,30 @@ def signup(request):
 #should render user registered page if unique user is entered
 #need validation for email, user, dob, profile image 
 def register(request):
-	if 'username' in request.POST and 'password' in request.POST:
+	if request.method == "POST":
 		u = request.POST['username']
-		passw = request.POST['password']
+		p = request.POST['password']
+
 		user = Member(username=u)
-		user.set_password(passw)
+		user.set_password(p)
+
 		try:
 			user.save()
 
 		except: 
 			Http404("Username " + u + "is already taken")
 
-		return HttpResponse("the user has been registered rendered page")
+		gender = request.POST['gender']
+		image = request.POST['image']
+		email = request.POST['email']
+		dob = request.POST['dob']
+
+		registeredUser = Profile(image = image, email = email, GENDER_CHOICES = gender, dob = dob)
+		registeredUser.save()
+
+		hobby = request.POST['hobby']
+		hobbies = Hobby(hobby = hobby)
+		hobbies.save()
 
 	else:
 		return HttpResponse("no data was inserted")
