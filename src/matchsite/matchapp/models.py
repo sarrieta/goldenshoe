@@ -22,7 +22,7 @@ class Profile(models.Model):
         return str(self.member) if self.has_member else 'NONE'
 
     def __str__(self):
-        return self.text + ' (' + self.member_check + ')'
+        return str(self.member.username)  if self.has_member else 'NONE'
 
 # The Hobby models provides an intermediate model for
 # the 'hobbies' ManyToMany relationship between Members
@@ -34,8 +34,7 @@ class Hobby(models.Model):
     hobby = models.CharField(max_length=4096)
 
     def __str__(self):
-        return self.user.username  
-
+        return self.hobby
 
 # Django's User model allows for Members to inherit
 # username and password 
@@ -47,9 +46,10 @@ class Member(User):
         null=True,
         on_delete=models.CASCADE
     )
+    
     hobbies = models.ManyToManyField(
-        to=Hobby,
         blank=True,
+        to=Hobby,
         symmetrical=False,
         related_name='related_to'
     )

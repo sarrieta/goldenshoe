@@ -25,7 +25,6 @@ def register(request):
 		user.set_password(passw)
 		try:
 			user.save()
-
 		except: 
 			Http404("Username " + u + "is already taken")
 
