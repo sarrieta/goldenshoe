@@ -11,7 +11,7 @@ $.ajax({
 
 		       gender: $("input[name='gender']:checked").val();
 
-   		       image: //need value of image
+   		       //image: //need value of image
 
 		       email: $("#email").val()
 
