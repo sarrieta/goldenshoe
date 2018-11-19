@@ -5,8 +5,8 @@ from django.contrib.auth.hashers import make_password
 
 #should render login page but also include a signup button
 def index(request):
-    return HttpResponse("Login page")
-
+    #return HttpResponse("Login page")
+    return render(request,'matchapp/sign_up.html')
 #user logged in
 def loggedin(request):
 	return HttpResponse("user logged in")
@@ -16,7 +16,7 @@ def signup(request):
 	return HttpResponse("signup page")
 
 #should render user registered page if unique user is entered
-#need validation for email, user, dob, profile image 
+#need validation for email, user, dob, profile image
 def register(request):
 	if request.method == "POST":
 		u = request.POST['username']
@@ -27,8 +27,7 @@ def register(request):
 
 		try:
 			user.save()
-
-		except: 
+		except:
 			Http404("Username " + u + "is already taken")
 
 		gender = request.POST['gender']
@@ -54,7 +53,7 @@ def login(request):
 def logout(request):
 	return HttpResponse("logout")
 
-#shows another page with users that have similar interests 
+#shows another page with users that have similar interests
 #order of most common hobbies first
 #@loggedin
 def similarHobbies(request):

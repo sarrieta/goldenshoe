@@ -3,11 +3,11 @@ from matchapp import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    #signup 
+    #signup
     path('signup/', views.signup, name='signup'),
     #register
     path('register/', views.register, name='register'),
-    #user profile edit page 
+    #user profile edit page
     path('profile/', views.profile, name='profile'),
     #login page
     path('login/', views.login, name='login'),
@@ -15,7 +15,7 @@ urlpatterns = [
     path('logout/', views.logout, name = 'logout'),
     #similar hobbies
     path('similarHobbies/', views.similarHobbies, name='similarHobbies'),
-    #Ajax: filter 
+    #Ajax: filter
     path('filter/', views.filter, name='filter'),
     #upload image
     path('uploadimage/', views.upload_Image, name='uploadimage'),
