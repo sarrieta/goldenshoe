@@ -3,10 +3,16 @@ from django.http import HttpResponse, Http404
 from matchapp.models import Member, Profile, Hobby
 from django.contrib.auth.hashers import make_password
 
+appname = 'matchapp'
+
 #should render login page but also include a signup button
 def index(request):
-    #return HttpResponse("Login page")
-    return render(request,'matchapp/register.html')
+	context = {
+		'appname' : appname
+	}	
+	# Render the index page
+	return render(request,'matchapp/login.html', context)
+
 #user logged in
 def loggedin(request):
 	return HttpResponse("user logged in")
