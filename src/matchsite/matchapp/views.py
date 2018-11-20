@@ -11,6 +11,10 @@ def index(request):
 def loggedin(request):
 	return HttpResponse("user logged in")
 
+#terms and conditions
+def tc(request):
+	return render(request,'matchapp/tc.html')
+
 #should render the signup page
 def signup(request):
 	return HttpResponse("signup page")
