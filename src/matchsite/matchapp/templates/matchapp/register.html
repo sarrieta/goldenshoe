@@ -1,12 +1,15 @@
 {% extends 'matchapp/base.html' %}
-
+{% load static %}
 {% block content %}
 
 <div class="container_register">
     <form action="POST" class="animate" >
 
+      <div class="imgcontainer">
+        <img src="{% static 'images/logo.png' %}" class="logo">
+      </div>
+
         <h1>Register</h1>
-        <p>Please fill in this form to create an account.</p>
         <hr>
 
         <!--<label for="email"><b>Email</b></label>
