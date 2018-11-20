@@ -23,14 +23,15 @@ def tc(request):
 
 #should render the signup page
 def signup(request):
-	return HttpResponse("signup page")
+	return render(request,'matchapp/register.html')
+
 
 #should render user registered page if unique user is entered
 #need validation for email, user, dob, profile image
 def register(request):
 	if request.method == "POST":
-		u = request.POST['username']
-		p = request.POST['password']
+		u = request.POST['user']
+		p = request.POST['psw']
 
 		user = Member(username=u)
 		user.set_password(p)
@@ -40,7 +41,13 @@ def register(request):
 		except:
 			Http404("Username " + u + "is already taken")
 
-		gender = request.POST['gender']
+		return render(request,'matchapp/login.html')
+
+	else:
+		return HttpResponse("don't work")
+
+
+		"""gender = request.POST['gender']
 		image = request.POST['image']
 		email = request.POST['email']
 		dob = request.POST['dob']
@@ -53,7 +60,7 @@ def register(request):
 		hobbies.save()
 
 	else:
-		return HttpResponse("no data was inserted")
+		return HttpResponse("no data was inserted")"""
 
 #this occurs when user presses login button from index
 def login(request):

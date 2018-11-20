@@ -3,8 +3,8 @@
 {% block content %}
 
 <div class="container_register">
-    <form action="POST" class="animate" >
-
+    <form action="{% url 'register' %}"  method="POST" class="animate" >
+      {% csrf_token %}
       <div class="imgcontainer">
         <img src="{% static 'images/logo.png' %}" class="logo">
       </div>
