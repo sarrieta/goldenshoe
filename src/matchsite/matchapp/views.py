@@ -3,13 +3,23 @@ from django.http import HttpResponse, Http404
 from matchapp.models import Member, Profile, Hobby
 from django.contrib.auth.hashers import make_password
 
+appname = 'matchapp'
+
 #should render login page but also include a signup button
 def index(request):
-    #return HttpResponse("Login page")
-    return render(request,'matchapp/sign_up.html')
+	context = {
+		'appname' : appname
+	}	
+	# Render the index page
+	return render(request,'matchapp/login.html', context)
+
 #user logged in
 def loggedin(request):
 	return HttpResponse("user logged in")
+
+#terms and conditions
+def tc(request):
+	return render(request,'matchapp/tc.html')
 
 #should render the signup page
 def signup(request):
@@ -47,8 +57,8 @@ def register(request):
 
 #this occurs when user presses login button from index
 def login(request):
-	return HttpResponse("login")
-
+	#return HttpResponse("login")
+    return render(request,'matchapp/login.html')
 #render logout page
 def logout(request):
 	return HttpResponse("logout")

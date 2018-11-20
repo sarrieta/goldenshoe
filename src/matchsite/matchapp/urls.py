@@ -6,6 +6,8 @@ urlpatterns = [
     #signup
     path('signup/', views.signup, name='signup'),
     #register
+    path('tc/', views.tc, name='tc'),
+    #register
     path('register/', views.register, name='register'),
     #user profile edit page
     path('profile/', views.profile, name='profile'),
