@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import make_password
 #should render login page but also include a signup button
 def index(request):
     #return HttpResponse("Login page")
-    return render(request,'matchapp/sign_up.html')
+    return render(request,'matchapp/sign_in.html')
 #user logged in
 def loggedin(request):
 	return HttpResponse("user logged in")
