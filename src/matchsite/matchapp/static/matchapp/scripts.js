@@ -1,6 +1,13 @@
 
 ///password validation starts
 
+
+$(function() {
+    $('#profile-image1').on('click', function() {
+    $('#profile-image-upload').click();
+    });
+});
+
 $('#psw, #psw-rep').on('keyup', function () {
 
         if ($('#psw').val() == $('#psw-rep').val()) {
