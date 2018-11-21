@@ -29,25 +29,27 @@ def signup(request):
 #should render user registered page if unique user is entered
 #need validation for email, user, dob, profile image
 def register(request):
+
     if 'username' in request.POST and 'password' in request.POST:
-		u = request.POST['user']
-		p = request.POST['psw']
+        u = request.POST['user']
+        p = request.POST['psw']
 
-		user = Member(username=u)
-		user.set_password(p)
+        user = Member(username=u)
+        user.set_password(p)
 
-		try:
-			user.save()
-		except:
-			Http404("Username " + u + "is already taken")
-			
-		context = {
+        try:
+            user.save()
+        except:
+            Http404("Username " + u + "is already taken")
+
+        context = {
 			'username': u
 		}
-		return render(request,'matchapp/login.html',context)
 
-	else:
-		return Http404("Data was not inserted")
+        return render(request,'matchapp/login.html',context)
+
+    else:
+       return Http404("Data was not inserted")
 
 
 #this occurs when user presses login button from index
