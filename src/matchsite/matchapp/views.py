@@ -7,11 +7,8 @@ appname = 'matchapp'
 
 #should render login page but also include a signup button
 def index(request):
-	context = {
-		'appname' : appname
-	}
 	# Render the index page
-	return render(request,'matchapp/login.html', context)
+	return render(request,'matchapp/login.html', {'form': form})
 
 #user logged in
 def loggedin(request):
@@ -23,14 +20,15 @@ def tc(request):
 
 #should render the signup page
 def signup(request):
-	return render(request,'matchapp/register.html')
+	return render(request,'matchapp/register.html', {'form': form})
 
 
+#once user clicks register button
 #should render user registered page if unique user is entered
 #need validation for email, user, dob, profile image
 def register(request):
 
-    if 'username' in request.POST and 'password' in request.POST:
+    if request.method == "POST":
         u = request.POST['user']
         p = request.POST['psw']
 
@@ -42,11 +40,7 @@ def register(request):
         except:
             Http404("Username " + u + "is already taken")
 
-        context = {
-			'username': u
-		}
-
-        return render(request,'matchapp/login.html',context)
+        return render(request,'matchapp/login.html',{'form': form})
 
     else:
        return Http404("Data was not inserted")
@@ -55,10 +49,22 @@ def register(request):
 #this occurs when user presses login button from index
 def login(request):
 	#return HttpResponse("login")
-    return render(request,'matchapp/login.html')
+
+	if 'username' in request.POST and 'password' in request.POST:
+		if form.is_valid():
+			username = form.cleaned_data.get("username")
+			password = form.cleaned_data.get("password")
+			user = authenticate(username=username, password=password)
+			if user is not None:
+				if user.is_active:
+					login(request,user)
+					return render(request, 'profile.html', {'form': form})
+
+	return render(request,'matchapp/login.html')
+
 #render logout page
 def logout(request):
-	return HttpResponse("logout")
+	return render(request, 'matchapp/login.html')
 
 #shows another page with users that have similar interests
 #order of most common hobbies first
