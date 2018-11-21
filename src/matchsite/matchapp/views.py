@@ -11,7 +11,7 @@ def index(request):
 		'appname' : appname
 	}
 	# Render the index page
-	return render(request,'matchapp/register.html', context)
+	return render(request,'matchapp/login.html', context)
 
 #user logged in
 def loggedin(request):
@@ -29,7 +29,7 @@ def signup(request):
 #should render user registered page if unique user is entered
 #need validation for email, user, dob, profile image
 def register(request):
-	if request.method == "POST":
+    if 'username' in request.POST and 'password' in request.POST:
 		u = request.POST['user']
 		p = request.POST['psw']
 
@@ -40,27 +40,15 @@ def register(request):
 			user.save()
 		except:
 			Http404("Username " + u + "is already taken")
-
-		return render(request,'matchapp/login.html')
-
-	else:
-		return HttpResponse("don't work")
-
-
-		"""gender = request.POST['gender']
-		image = request.POST['image']
-		email = request.POST['email']
-		dob = request.POST['dob']
-
-		registeredUser = Profile(image = image, email = email, GENDER_CHOICES = gender, dob = dob)
-		registeredUser.save()
-
-		hobby = request.POST['hobby']
-		hobbies = Hobby(hobby = hobby)
-		hobbies.save()
+			
+		context = {
+			'username': u
+		}
+		return render(request,'matchapp/login.html',context)
 
 	else:
-		return HttpResponse("no data was inserted")"""
+		return Http404("Data was not inserted")
+
 
 #this occurs when user presses login button from index
 def login(request):
@@ -84,8 +72,8 @@ def filter(request):
 #user profile edit page
 #@loggedin
 def profile(request):
-	#return HttpResponse("user should be able to edit page")
-    return render(request,'matchapp/profile.html')
+	return HttpResponse("user should be able to edit page")
+
 #@loggedin
 def upload_Image(request):
 	return HttpResponse("user should be able to upload an image")
