@@ -16,7 +16,9 @@
         <input type="email" id=email placeholder="E.g: example@example.com" size=35 name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required><br><br>
       -->
         <label for="username"><b>Username :</b></label><br>
+        
         <input id = "username" type="text" placeholder="Enter username" pattern="[A-Za-z]{3,15}" title="Usernames must be between 3 and 15 characters. Only letters are allowed."name="user" required><br>
+        <p>{{username.user}}</p>
 
       <div oncopy="return false" oncut="return false" onpaste="return false">
         <label for="psw"><b>Password :</b></label><br>
