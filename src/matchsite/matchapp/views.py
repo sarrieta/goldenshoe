@@ -9,9 +9,9 @@ appname = 'matchapp'
 def index(request):
 	context = {
 		'appname' : appname
-	}	
+	}
 	# Render the index page
-	return render(request,'matchapp/login.html', context)
+	return render(request,'matchapp/register.html', context)
 
 #user logged in
 def loggedin(request):
@@ -77,8 +77,8 @@ def filter(request):
 #user profile edit page
 #@loggedin
 def profile(request):
-	return HttpResponse("user should be able to edit page")
-
+	#return HttpResponse("user should be able to edit page")
+    return render(request,'matchapp/profile.html')
 #@loggedin
 def upload_Image(request):
 	return HttpResponse("user should be able to upload an image")
