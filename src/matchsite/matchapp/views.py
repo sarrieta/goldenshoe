@@ -9,7 +9,7 @@ appname = 'matchapp'
 def index(request):
 	context = {
 		'appname' : appname
-	}	
+	}
 	# Render the index page
 	return render(request,'matchapp/login.html', context)
 
@@ -23,37 +23,34 @@ def tc(request):
 
 #should render the signup page
 def signup(request):
-	return HttpResponse("signup page")
+	return render(request,'matchapp/register.html')
+
 
 #should render user registered page if unique user is entered
 #need validation for email, user, dob, profile image
 def register(request):
-	if request.method == "POST":
-		u = request.POST['username']
-		p = request.POST['password']
 
-		user = Member(username=u)
-		user.set_password(p)
+    if 'username' in request.POST and 'password' in request.POST:
+        u = request.POST['user']
+        p = request.POST['psw']
 
-		try:
-			user.save()
-		except:
-			Http404("Username " + u + "is already taken")
+        user = Member(username=u)
+        user.set_password(p)
 
-		gender = request.POST['gender']
-		image = request.POST['image']
-		email = request.POST['email']
-		dob = request.POST['dob']
+        try:
+            user.save()
+        except:
+            Http404("Username " + u + "is already taken")
 
-		registeredUser = Profile(image = image, email = email, GENDER_CHOICES = gender, dob = dob)
-		registeredUser.save()
+        context = {
+			'username': u
+		}
 
-		hobby = request.POST['hobby']
-		hobbies = Hobby(hobby = hobby)
-		hobbies.save()
+        return render(request,'matchapp/login.html',context)
 
-	else:
-		return HttpResponse("no data was inserted")
+    else:
+       return Http404("Data was not inserted")
+
 
 #this occurs when user presses login button from index
 def login(request):

@@ -4,7 +4,13 @@
 <html>
 
 <head>
+      <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+      <script src="{% static 'matchapp/scripts.js' %}"></script>
+      <script src="{% static 'matchapp/ajax.js' %}"></script>
 
+      <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+      <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
     <title>{{appname}}</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -13,6 +19,7 @@
     <link rel="stylesheet" href="{% static 'matchApp.css' %}">
 </head>
 <style>
+
     body {
 
         font-family: Arial, Helvetica, sans-serif;
@@ -187,14 +194,42 @@
             width: 100%;
         }
     }
+
+    input.hidden {
+      position: absolute;
+      left: -9999px;
+      }
+
+      #profile-image1 {
+      cursor: pointer;
+
+      width: 100px;
+      height: 100px;
+      border:2px solid #03b1ce ;}
+      .tital{ font-size:16px; font-weight:500;}
+      .bot-border{ border-bottom:1px #f8f8f8 solid;  margin:5px 0  5px 0}
+
+     /* navigation sidebar Css starts*/
+    
+
+
+
+     /* navigation sidebar Css ends*/
+
+
 </style>
 
 
 <body>
 
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script src="{% static 'matchapp/scripts.js' %}"></script>
-    <script src="{% static 'matchapp/ajax.js' %}"></script>
+  <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="profile/">Profile</a>
+      <a href="#">Matches</a>
+      <a href="#">Logout</a>
+ </div>
+
+
 
     {% block content %}
     {% endblock %}

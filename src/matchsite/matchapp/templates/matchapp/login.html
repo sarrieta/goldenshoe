@@ -17,14 +17,14 @@
         <h1>Sign In</h1>
         <hr>
           <label for="uname"><b>Username</b></label><br>
-          <input type="text" placeholder="Enter Username" name="uname" required><br>
+          <input type="text" placeholder="Enter Username" pattern="[A-Za-z]{3,15}" name="uname" required><br>
 
           <label for="psw"><b>Password</b></label><br>
           <input type="password" placeholder="Enter Password" name="psw" required><br>
 
           <button type="submit">Login</button><br><br>
 
-          <p>Don't have an account?<a onclick='window.location.href=""' href="#"> Register</a>.</p>
+          <p>Don't have an account?<a onclick='window.location.href=""' href="register/"> Register</a>.</p>
       </div>
 
   </div>

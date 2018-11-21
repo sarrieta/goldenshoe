@@ -21,4 +21,5 @@ urlpatterns = [
     path('filter/', views.filter, name='filter'),
     #upload image
     path('uploadimage/', views.upload_Image, name='uploadimage'),
+
 ]
