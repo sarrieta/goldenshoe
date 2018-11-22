@@ -38,11 +38,11 @@ def signup(request):
 #need validation for email, user, dob, profile image
 def register(request):
 
-	form_class = UserForm
+	form = UserRegForm()
 
 	if request.method == "POST":
 		#form_class is class of form name NEED TO CHANGE
-		form = form_class(request.POST)
+		form = form(request.POST)
 
 		if form.is_valid():
 			#user = form.save(commit=False)
@@ -121,6 +121,7 @@ def filter(request, user):
 @loggedin
 def displayProfile(request, username):
 	#query users login
+	form = UserProfile()
 	Member.objects.get(username=username)
 	return render(request, 'matchapp/displayProfile.html', {'form': form})
 	"""try:
