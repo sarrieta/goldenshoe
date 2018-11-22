@@ -1,5 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 from matchapp import views
+
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'profiles', views.ProfileViewSet)
+router.register(r'members', views.MemberViewSet)
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -21,5 +27,7 @@ urlpatterns = [
     path('filter/', views.filter, name='filter'),
     #upload image
     path('uploadimage/', views.upload_Image, name='uploadimage'),
+    # API
+    path('api/', include(router.urls))
 
 ]

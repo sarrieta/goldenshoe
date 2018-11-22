@@ -3,6 +3,21 @@ from django.http import HttpResponse, Http404
 from matchapp.models import Member, Profile, Hobby
 from django.contrib.auth.hashers import make_password
 
+# REST imports
+from rest_framework import viewsets
+from .serializers import ProfileSerializer, MemberSerializer
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    # API endpoint for listing and creating profiles
+    queryset = Profile.objects.order_by('user')
+    serializer_class = ProfileSerializer
+
+class MemberViewSet(viewsets.ModelViewSet):
+    # API endpoint for listing and creating members
+    queryset = Member.objects.order_by('username')
+    serializer_class = MemberSerializer
+
+
 appname = 'matchapp'
 
 #should render login page but also include a signup button
