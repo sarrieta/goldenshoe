@@ -99,7 +99,8 @@ def login(request):
                         request.session['password'] = password
 						#login(request,user)
                         return render(request,'matchapp/displayProfile.html', {'form': form})
-    else:
+				
+	else:
         return render(request,'matchapp/login.html')
 
 #render logout page
