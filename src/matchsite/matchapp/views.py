@@ -68,23 +68,6 @@ def register(request):
 
 
 
-    """if request.method == "POST":
-        u = request.POST['user']
-        p = request.POST['psw']
-
-        user = Member(username=u)
-        user.set_password(p)
-
-        try:
-            user.save()
-        except:
-            Http404("Username " + u + "is already taken")
-
-        return render(request,'matchapp/login.html',{'form': form})
-
-    else:
-       return Http404("Data was not inserted")"""
-
 
 
 
@@ -135,12 +118,15 @@ def displayProfile(request, username):
 #user profile edit page
 #https://stackoverflow.com/questions/29246468/django-how-can-i-update-the-profile-pictures-via-modelform
 #https://stackoverflow.com/questions/5871730/need-a-minimal-django-file-upload-example
+
 @loggedin
 def editProfile(request, user):
-	if request.method = "POST":
+
+	"""if request.method = "POST":
 		#editProfileForm = class in forms.py
-		form = editProfileForm(request.POST,request.FILES,instance=user)
-		if form.is_valid():
+	    form = editProfileForm(request.POST,request.FILES,instance=user)
+        
+        if form.is_valid():
 			#file is the name given in forms
 			if 'file' in request.FILES:
 				file = request.FILES['file']
@@ -150,7 +136,7 @@ def editProfile(request, user):
 
 		else:
 			form = editProfileForm(instance=user)
-			return render(request, 'matchapp/editProfile.html', {'form': form}) 
+			return render(request, 'matchapp/editProfile.html', {'form': form})""" 
 
 	#return HttpResponse("user should be able to edit page")
 
