@@ -19,7 +19,6 @@ class MemberViewSet(viewsets.ModelViewSet):
     queryset = Member.objects.order_by('username')
     serializer_class = MemberSerializer
 
-
 appname = 'matchapp'
 
 #should render login page but also include a signup button
@@ -100,7 +99,6 @@ def login(request):
                         request.session['password'] = password
 						#login(request,user)
                         return render(request,'matchapp/displayProfile.html', {'form': form})
-
     else:
         return render(request,'matchapp/login.html')
 
