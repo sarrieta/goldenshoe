@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db.models import Count
 from django.http import HttpResponse, Http404
 from matchapp.models import Member, Profile, Hobby
 from django.contrib.auth.hashers import make_password
@@ -119,7 +120,21 @@ def logout(request,user):
 #order of most common hobbies first
 @loggedin
 def similarHobbies(request, user):
-	return HttpResponse("return list of people with similar hobbies")
+    # Get all the other users exclude current logged in user
+    exclude = Member.objects.exclude(id=user.id)
+    # Filter based on the current logged in user on same hobbies
+    common = exclude.filter(hobbies__in=user.hobbies.all())
+    # Get the number of hobbies of other users
+    hobbies = common.annotate(hob_count=Count('hobbies'))
+    # Process the matches in decending
+    match = hobbies.filter(hob_count__gt=1).order_by('-hob_count')
+    
+    context = { 
+        'appname' : appname,
+        'matches' : match,
+        'loggedIn': True
+        }
+    return render(request,'#',context)
 
 #filter button on similarHobbies page which generates
 @loggedin
