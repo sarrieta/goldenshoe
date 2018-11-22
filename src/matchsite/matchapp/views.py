@@ -69,64 +69,35 @@ def register(request):
 #this occurs when user presses login button from index
 def login(request):
 
-	if request.method == "POST":
-		form = UserLogInForm(request.POST)
-		#return HttpResponse("login")
-		if 'username' in request.POST and 'password' in request.POST:
-			if form.is_valid():
-				username = form.cleaned_data.get("username")
-				password = form.cleaned_data.get("password")
-				try: member = Member.objects.get(username=username)
-			    except: Member.DoesNotExist: Http404("User does not exist")
-				user = authenticate(username=username, password=password)
-				if user is not None:
-					if user.is_active:
-						request.session['username'] = username
-						request.session['password'] = password
+    if request.method == "POST":
+        form = UserLogInForm(request.POST)
+        if 'username' in request.POST and 'password' in request.POST:
+            if form.is_valid():
+
+                username = form.cleaned_data.get("username")
+                password = form.cleaned_data.get("password")
+
+                try: 
+                   member = Member.objects.get(username=username)
+
+                except Member.DoesNotExist: 
+                   Http404("User does not exist")
+
+                user = authenticate(username=username, password=password)
+				
+                if user is not None:
+                    if user.is_active:
+                        request.session['username'] = username
+                        request.session['password'] = password
 						#login(request,user)
-						return render(request,'matchapp/displayProfile.html', {'form': form})
+                        return render(request,'matchapp/displayProfile.html', {'form': form})
 
-	else:
-		return render(request,'matchapp/login.html')
-
-
-if not ('username' in request.POST and 'password' in request.POST):
-        context = { 'appname': appname }
-        return render(request,'mainapp/login.html',context)
     else:
-        username = request.POST['username']
-        password = request.POST['password']
-        try: member = Member.objects.get(username=username)
-        except Member.DoesNotExist: raise Http404('User does not exist')
-        if member.check_password(password):
-            # remember user in session variable
-            request.session['username'] = username
-            request.session['password'] = password
-            context = {
-               'appname': appname,
-               'username': username,
-               'loggedin': True
-            }
-            response = render(request, 'mainapp/login.html', context)
-            # remember last login in cookie
-            now = D.datetime.utcnow()
-            max_age = 365 * 24 * 60 * 60  #one year
-            delta = now + D.timedelta(seconds=max_age)
-            format = "%a, %d-%b-%Y %H:%M:%S GMT"
-            expires = D.datetime.strftime(delta, format)
-            response.set_cookie('last_login',now,expires=expires)
-            return response
-        else:
-            raise Http404('Wrong password')
-
-
-
-
-
+        return render(request,'matchapp/login.html')
 
 #render logout page
 def logout(request):
-	request.session.flush
+	request.session.flush()
 	return redirect("login")
 
 
