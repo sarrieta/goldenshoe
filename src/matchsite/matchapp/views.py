@@ -25,7 +25,7 @@ appname = 'matchapp'
 def index(request):
 	# Render the index page
 	form = UserLogInForm()
-	return render(request,'matchapp/login.html', {'form': form})
+	return render(request,'matchapp/index.html', {'form': form})
 
 #user logged in
 def loggedin(view):
@@ -99,13 +99,20 @@ def login(request):
                         request.session['password'] = password
 						#login(request,user)
                         return render(request,'matchapp/displayProfile.html', {'form': form})
+
+                #return HttpResponse("<span> User or password is wrong </span")
+                
+                else:
+                    raise Http404('User or password is incorrect')
+
     else:
-        return render(request,'matchapp/login.html')
+        return render(request,'matchapp/index.html')
 
 #render logout page
-def logout(request):
+@loggedin
+def logout(request,user):
 	request.session.flush()
-	return redirect("login")
+	return redirect("/")
 
 
 #shows another page with users that have similar interests
