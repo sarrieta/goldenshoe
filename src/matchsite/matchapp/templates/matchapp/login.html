@@ -1,32 +1,20 @@
 {% extends 'matchapp/base.html' %}
 {% load static %}
-
 {% block content %}
 
+<div class=container_register>
+<form action="POST" method="{% url 'login' %}">
+    <!--{% csrf_token %}-->
+    <div class="imgcontainer">
+      <img src="{% static 'images/logo.png' %}" class="logo">
+    </div>
+    <br>
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+    <br>
+    <p> Do not have an account? <a href="{% url 'signup' %}">Click here</a>.</p>
 
-  <div class="container_register">
-      <form class="animate" action="POST">
-          <div class="imgcontainer">
-            <img src="{% static 'images/logo.png' %}" class="logo">
-          </div>
-
-
-
-      <div class="container">
-
-        <h1>Sign In</h1>
-        <hr>
-          <label for="uname"><b>Username</b></label><br>
-          <input type="text" placeholder="Enter Username" pattern="[A-Za-z]{3,15}" name="uname" required><br>
-
-          <label for="psw"><b>Password</b></label><br>
-          <input type="password" placeholder="Enter Password" name="psw" required><br>
-
-          <button type="submit">Login</button><br><br>
-
-          <p>Don't have an account?<a onclick='window.location.href=""' href="{% url signup %}"> Register</a>.</p>
-      </div>
-
-  </div>
 </form>
+<div>
 {% endblock %}
