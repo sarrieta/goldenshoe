@@ -47,7 +47,7 @@ def register(request):
 		if form.is_valid():
 			#user = form.save(commit=False)
 
-			
+
 			#normalized data
 			username = form.cleaned_data['username']
 			password = form.cleaned_data['password']
@@ -82,7 +82,7 @@ def login(request):
 			if user is not None:
 				if user.is_active:
 					login(request,user)
-					return render(request, 'profile.html', {'form': form})
+					return render(request, 'displayProfile.html', {'form': form})
 
 	return render(request,'matchapp/login.html')
 
@@ -125,18 +125,17 @@ def editProfile(request, user):
 	"""if request.method = "POST":
 		#editProfileForm = class in forms.py
 	    form = editProfileForm(request.POST,request.FILES,instance=user)
-        
+
         if form.is_valid():
 			#file is the name given in forms
 			if 'file' in request.FILES:
 				file = request.FILES['file']
 
 			form.save();
-			return render(request, 'matchapp/editProfile.html', {'form': form}) 
+			return render(request, 'matchapp/editProfile.html', {'form': form})
 
 		else:
 			form = editProfileForm(instance=user)
-			return render(request, 'matchapp/editProfile.html', {'form': form})""" 
+			return render(request, 'matchapp/editProfile.html', {'form': form})"""
 
 	#return HttpResponse("user should be able to edit page")
-
