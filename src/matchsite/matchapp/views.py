@@ -5,6 +5,21 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate
 from .forms import *
 
+# REST imports
+from rest_framework import viewsets
+from .serializers import ProfileSerializer, MemberSerializer
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    # API endpoint for listing and creating profiles
+    queryset = Profile.objects.order_by('user')
+    serializer_class = ProfileSerializer
+
+class MemberViewSet(viewsets.ModelViewSet):
+    # API endpoint for listing and creating members
+    queryset = Member.objects.order_by('username')
+    serializer_class = MemberSerializer
+
+
 appname = 'matchapp'
 
 #should render login page but also include a signup button
@@ -76,12 +91,6 @@ def login(request):
 
                 username = form.cleaned_data.get("username")
                 password = form.cleaned_data.get("password")
-
-                try: 
-                   member = Member.objects.get(username=username)
-
-                except Member.DoesNotExist: 
-                   Http404("User does not exist")
 
                 user = authenticate(username=username, password=password)
 				
