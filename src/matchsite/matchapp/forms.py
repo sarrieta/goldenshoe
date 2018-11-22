@@ -6,27 +6,25 @@ from django.core.validators import RegexValidator
 
 
 class UserRegForm(forms.Form):
-        my_validator = RegexValidator(r"A", "Your string should contain letter A in it.")
+
 
         username = forms.CharField(label='Username', widget=forms.TextInput(attrs={
             "placeholder":"Username",
             "pattern":"[[^A-Za-z0-9]{3,15}",
+            "name":"username",
             "title":"Usernames must be between 3 and 15 characters. Only letters and numbers are allowed"
         }))
         password = forms.CharField(label='Password',max_length=32, widget=forms.PasswordInput(attrs={
             "placeholder":"Enter password",
             "pattern":"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}",
+            "name":"password",
             "title":"Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
         }))
         re_password = forms.CharField(label='Repeat Password',max_length=32, widget=forms.PasswordInput(attrs={
-            "placeholder":"Repeat password"}))
+            "placeholder":"Repeat password",
+            "name":"re_password"}))
 
-        def clean_password(self):
-            pass_passed=self.cleaned_data.get('password')
-            pass2_passed=self.cleaned_data.get('re_password')
-            if pass_passed != pass2_passed:
-                raise forms.ValidationError("Passwords do not match")
-            return pass_passed
+        
 
 
 
