@@ -2,14 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from matchapp.models import Member, Profile, Hobby
 from django.contrib.auth.hashers import make_password
-#from .forms import *
-
+from .forms import *
 
 appname = 'matchapp'
 
 #should render login page but also include a signup button
 def index(request):
 	# Render the index page
+	form = UserLogInForm()
 	return render(request,'matchapp/login.html', {'form': form})
 
 #user logged in
@@ -30,6 +30,7 @@ def tc(request):
 
 #should render the signup page
 def signup(request):
+	form = UserRegForm()
 	return render(request,'matchapp/register.html', {'form': form})
 
 #once user clicks register button
