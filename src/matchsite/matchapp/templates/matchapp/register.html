@@ -11,13 +11,13 @@
     <br>
     {{ form.as_p }}
 
-    <p>By creating an account you agree to our <a href="{% url 'login' %}"><u> Terms & Privacy </u></a>
+    <p>By creating an account you agree to our <a href="{% url 'tc' %}"><u> Terms & Privacy </u></a>
       <input type="checkbox" name="tc"style="margin-bottom:15px" required></p>
 
     <input type="submit" value="Submit">
     <input type="reset" value="Reset"><br></br>
 
-    <p>Already have an account? <a href="{% url 'login' %}">Click here</a>.</p>
+    <p>Already have an account? <a href="{% url 'index' %}">Click here</a>.</p>
 
 
 </form>

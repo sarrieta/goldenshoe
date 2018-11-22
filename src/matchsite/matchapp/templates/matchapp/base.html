@@ -34,8 +34,19 @@
         margin-top: 50px;
         border: 3px;
     }
+    div.tc_wrapper {
 
+        width: 800px;
+        margin: auto;
+        margin-top: 50px;
+        margin-left: 400px;
+        margin-bottom: 200px;
+        border: 3px;
+    }
+    div.tc_wrapper.h1 {
 
+        text-align: center;
+    }
      /* navigation sidebar Css starts*/
      .sidenav {
      height: 100%;
@@ -81,10 +92,13 @@
 <body>
 
   <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <a href="profile/">Profile</a>
-      <a href="#">Matches</a>
-      <a href="#">Logout</a>
+      <!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
+      <br><br><br><br><br><br>
+
+      <a href="{% url 'editProfile' %}">Edit Profile</a>
+      <a href="{% url 'displayProfile' %}">View Profile</a>
+      <a href="{% url 'similarHobbies' %}">Matches</a>
+      <a href="{% url 'logout' %}">Log out</a>
  </div>
 
 
