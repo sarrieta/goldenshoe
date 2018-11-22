@@ -115,31 +115,25 @@ def logout(request,user):
 	request.session.flush()
 	return redirect("/")
 
-
 #shows another page with users that have similar interests
 #order of most common hobbies first
 @loggedin
 def similarHobbies(request, user):
-    # Check for the request type: 
-    if request.method == POST:
-        # Get all the other users exclude current logged in user
-        exclude = Member.objects.exclude(id=user.id)
-        # Filter based on the current logged in user on same hobbies
-        common = exclude.filter(hobbies__in=user.hobbies.all())
-        # Get the number of hobbies of other users
-        hobbies = common.annotate(hob_count=Count('hobbies'))
-        # Process the matches in decending
-        match = hobbies.filter(hob_count__gt=1).order_by('-hob_count')
+    # Get all the other users exclude current logged in user
+    exclude = Member.objects.exclude(id=user.id)
+    # Filter based on the current logged in user on same hobbies
+    common = exclude.filter(hobbies__in=user.hobbies.all())
+    # Get the number of hobbies of other users
+    hobbies = common.annotate(hob_count=Count('hobbies'))
+    # Process the matches in decending
+    match = hobbies.filter(hob_count__gt=1).order_by('-hob_count')
     
-        context = { 
-            'appname' : appname,
-            'matches' : match,
-            'loggedIn': True
-            }
-        # might have return JSON data back?
-        #return render(request,'#',context)
-    else:
-        raise Http404('POST not used') 
+    context = { 
+        'appname' : appname,
+        'matches' : match,
+        'loggedIn': True
+        }
+    return render(request,'#',context)
 
 #filter button on similarHobbies page which generates
 @loggedin
