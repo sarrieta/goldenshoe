@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate
 from django.http import HttpResponse, Http404
 from matchapp.models import Member, Profile, Hobby
 from django.contrib.auth.hashers import make_password
@@ -17,7 +18,6 @@ class MemberViewSet(viewsets.ModelViewSet):
     # API endpoint for listing and creating members
     queryset = Member.objects.order_by('username')
     serializer_class = MemberSerializer
-
 
 appname = 'matchapp'
 
@@ -59,11 +59,9 @@ def register(request):
 	if request.method == "POST":
 		#form_class is class of form name NEED TO CHANGE
 		form = UserRegForm(request.POST)
-		print("form errors: " + str(form.errors))
 
 		if form.is_valid():
 
-			print("inside form is valid")
 			#user = form.save(commit=False)
 			#normalized data
 			username = form.cleaned_data['username']
@@ -72,12 +70,10 @@ def register(request):
 			user = Member(username=username)
 			user.set_password(password)
 
-			try:
-				user.save()
-				return render(request,'matchapp/login.html',{'form': form})
+			try: user.save()
+			except IntegrityError: raise Http404('Username '+user+' already taken: Usernames must be unique')
 
-			except:
-				Http404("Username " + user + "is already taken")
+			return redirect('index')
 
 
 	else:
@@ -86,22 +82,38 @@ def register(request):
 
 #this occurs when user presses login button from index
 def login(request):
-	#return HttpResponse("login")
-	if 'username' in request.POST and 'password' in request.POST:
-		if form.is_valid():
-			username = form.cleaned_data.get("username")
-			password = form.cleaned_data.get("password")
-			user = authenticate(username=username, password=password)
-			if user is not None:
-				if user.is_active:
-					login(request,user)
-					return render(request, 'profile.html', {'form': form})
 
-	return render(request,'matchapp/login.html')
+    if request.method == "POST":
+        form = UserLogInForm(request.POST)
+        if 'username' in request.POST and 'password' in request.POST:
+            if form.is_valid():
+
+                username = form.cleaned_data.get("username")
+                password = form.cleaned_data.get("password")
+
+                try: 
+                   user = Member.objects.get(username=username)
+
+                except Member.DoesNotExist: 
+                   Http404("User does not exist")
+
+                user = authenticate(username=username, password=password)
+				
+                if user is not None:
+                    if user.is_active:
+                        request.session['username'] = username
+                        request.session['password'] = password
+						#login(request,user)
+                        return render(request,'matchapp/displayProfile.html', {'form': form})
+                return Http404("User is NONE")
+    else:
+        return render(request,'matchapp/login.html')
 
 #render logout page
 def logout(request):
-	return render(request, 'matchapp/login.html')
+	request.session.flush()
+	return redirect("login")
+
 
 #shows another page with users that have similar interests
 #order of most common hobbies first
@@ -115,10 +127,10 @@ def filter(request, user):
 	return HttpResponse("filter by gender and age using Ajax")
 
 @loggedin
-def displayProfile(request, username):
+def displayProfile(request, user):
 	#query users login
 	form = UserProfile()
-	Member.objects.get(username=username)
+	Member.objects.get(user=username)
 	return render(request, 'matchapp/displayProfile.html', {'form': form})
 	"""try:
 

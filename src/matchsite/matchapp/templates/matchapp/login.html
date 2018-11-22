@@ -3,8 +3,8 @@
 {% block content %}
 
 <div class=container_register>
-<form action="POST" method="{% url 'login' %}">
-    <!--{% csrf_token %}-->
+  <form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
     <div class="imgcontainer">
       <img src="{% static 'images/logo.png' %}" class="logo">
     </div>
@@ -17,6 +17,6 @@
     <p> Do not have an account? <a href="{% url 'register' %}">Click here</a>.</p>
 
 
-</form>
-<div>
-{% endblock %}
+  </form>
+  <div>
+    {% endblock %}
