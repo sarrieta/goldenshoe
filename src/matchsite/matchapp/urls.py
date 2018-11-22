@@ -9,14 +9,14 @@ router.register(r'members', views.MemberViewSet)
 
 urlpatterns = [
     path('', views.index, name='index'),
-    #signup
-    path('signup/', views.signup, name='signup'),
     #register
     path('tc/', views.tc, name='tc'),
     #register
     path('register/', views.register, name='register'),
     #user profile edit page
-    path('profile/', views.profile, name='profile'),
+    path('editProfile/', views.editProfile, name='editProfile'),
+    #displays profile 
+    path('displayProfile/', views.displayProfile, name='displayProfile'),
     #login page
     path('login/', views.login, name='login'),
     #logout page
@@ -26,8 +26,12 @@ urlpatterns = [
     #Ajax: filter
     path('filter/', views.filter, name='filter'),
     #upload image
+<<<<<<< HEAD
     path('uploadimage/', views.upload_Image, name='uploadimage'),
     # API
     path('api/', include(router.urls))
+=======
+    #path('uploadimage/', views.upload_Image, name='uploadimage'),
+>>>>>>> 39c198f60ba8e507362fe2cbf5f27174fdee11ab
 
 ]
