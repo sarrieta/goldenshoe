@@ -29,22 +29,26 @@ def tc(request):
 	return render(request,'matchapp/tc.html')
 
 #should render the signup page
-def signup(request):
-	form = UserRegForm()
-	return render(request,'matchapp/register.html', {'form': form})
+"""def signup(request):
+	#form = UserRegForm()
+	#return render(request,'matchapp/register.html', {'form': form})
+	return HttpResponse("test")"""
 
 #once user clicks register button
 #should render user registered page if unique user is entered
 #need validation for email, user, dob, profile image
 def register(request):
 
-	form = UserRegForm()
+	#form = UserRegForm()
 
 	if request.method == "POST":
 		#form_class is class of form name NEED TO CHANGE
-		form = form(request.POST)
+		form = UserRegForm(request.POST)
+		print("Is the form valid: " + str(form.is_valid()))
 
 		if form.is_valid():
+
+			print("inside form is valid")
 			#user = form.save(commit=False)
 
 			
@@ -64,7 +68,8 @@ def register(request):
 			return render(request,'matchapp/login.html',{'form': form})
 
 	else:
-		return Http404("Method was not post")
+		form = UserRegForm()
+		return render(request,'matchapp/register.html',{'form': form})
 
 
 
