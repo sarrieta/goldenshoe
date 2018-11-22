@@ -44,14 +44,12 @@ def register(request):
 	if request.method == "POST":
 		#form_class is class of form name NEED TO CHANGE
 		form = UserRegForm(request.POST)
-		print("Is the form valid: " + str(form.is_valid()))
+		print("form errors: " + str(form.errors))
 
 		if form.is_valid():
 
 			print("inside form is valid")
 			#user = form.save(commit=False)
-
-			
 			#normalized data
 			username = form.cleaned_data['username']
 			password = form.cleaned_data['password']
@@ -61,11 +59,11 @@ def register(request):
 
 			try:
 				user.save()
+				return render(request,'matchapp/login.html',{'form': form})
 
 			except:
-				Http404("Username " + u + "is already taken")
+				Http404("Username " + user + "is already taken")
 
-			return render(request,'matchapp/login.html',{'form': form})
 
 	else:
 		form = UserRegForm()
@@ -125,18 +123,17 @@ def editProfile(request, user):
 	"""if request.method = "POST":
 		#editProfileForm = class in forms.py
 	    form = editProfileForm(request.POST,request.FILES,instance=user)
-        
+
         if form.is_valid():
 			#file is the name given in forms
 			if 'file' in request.FILES:
 				file = request.FILES['file']
 
 			form.save();
-			return render(request, 'matchapp/editProfile.html', {'form': form}) 
+			return render(request, 'matchapp/editProfile.html', {'form': form})
 
 		else:
 			form = editProfileForm(instance=user)
-			return render(request, 'matchapp/editProfile.html', {'form': form})""" 
+			return render(request, 'matchapp/editProfile.html', {'form': form})"""
 
 	#return HttpResponse("user should be able to edit page")
-
