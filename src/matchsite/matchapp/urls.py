@@ -26,12 +26,7 @@ urlpatterns = [
     #Ajax: filter
     path('filter/', views.filter, name='filter'),
     #upload image
-<<<<<<< HEAD
-    path('uploadimage/', views.upload_Image, name='uploadimage'),
+    #path('uploadimage/', views.upload_Image, name='uploadimage'),
     # API
     path('api/', include(router.urls))
-=======
-    #path('uploadimage/', views.upload_Image, name='uploadimage'),
->>>>>>> 39c198f60ba8e507362fe2cbf5f27174fdee11ab
-
 ]
