@@ -1,8 +1,8 @@
-from django.shortcuts import render
-from django.contrib.auth import authenticate
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from matchapp.models import Member, Profile, Hobby
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth import authenticate
 from .forms import *
 
 # REST imports
@@ -91,12 +91,6 @@ def login(request):
                 username = form.cleaned_data.get("username")
                 password = form.cleaned_data.get("password")
 
-                try: 
-                   user = Member.objects.get(username=username)
-
-                except Member.DoesNotExist: 
-                   Http404("User does not exist")
-
                 user = authenticate(username=username, password=password)
 				
                 if user is not None:
@@ -105,7 +99,6 @@ def login(request):
                         request.session['password'] = password
 						#login(request,user)
                         return render(request,'matchapp/displayProfile.html', {'form': form})
-                return Http404("User is NONE")
     else:
         return render(request,'matchapp/login.html')
 

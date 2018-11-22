@@ -4,11 +4,12 @@
 
 <div class=container_register>
   <form method="POST" action="{% url 'login' %}">
-    {% csrf_token %}
+    <!--{% csrf_token %}-->
     <div class="imgcontainer">
       <img src="{% static 'images/logo.png' %}" class="logo">
     </div>
     <br>
+    {%csrf_token%}
     {{ form.as_p }}
     <br>
     <input type="submit" value="Submit">
