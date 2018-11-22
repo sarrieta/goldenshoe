@@ -71,11 +71,6 @@ def register(request):
 		form = UserRegForm()
 		return render(request,'matchapp/register.html',{'form': form})
 
-
-
-
-
-
 #this occurs when user presses login button from index
 def login(request):
 	#return HttpResponse("login")

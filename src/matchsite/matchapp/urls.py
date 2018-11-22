@@ -3,8 +3,6 @@ from matchapp import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    #signup
-    path('signup/', views.signup, name='signup'),
     #register
     path('tc/', views.tc, name='tc'),
     #register
