@@ -4,80 +4,90 @@
 {% block content %}
 
 
-  <div class="container_register">
+<div class="container_register">
     <div class="container">
         <div class="row">
 
 
-        <div class="col-md-7 ">
+            <div class="col-md-7 ">
 
-        <div class="panel panel-default">
-        <div class="panel-heading">  <h4 >User Profile</h4></div>
-         <div class="panel-body">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>User Profile</h4>
+                    </div>
+                    <div class="panel-body">
 
-          <div class="box box-info">
+                        <div class="box box-info">
 
-                  <div class="box-body">
-                           <div class="col-sm-6">
-                           <div  align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+                            <div class="box-body">
+                                <div class="col-sm-6">
+                                    <div align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"
+                                            id="profile-image1" class="img-circle img-responsive">
 
-                      <input id="profile-image-upload" class="hidden" type="file">
-        <div style="color:#999;" >click here to change profile image</div>
-                      <!--Upload Image Js And Css-->
+                                        <input id="profile-image-upload" class="hidden" type="file">
+                                        <div style="color:#999;">click here to change profile image</div>
+                                        <!--Upload Image Js And Css-->
 
-                           </div>
+                                    </div>
 
-                    <br>
-      {% csrf_token %}
-                    <!-- /input-group -->
-                  </div>
-                  <div class="col-sm-6">
-                  <h4 style="color:#00b1b1;">John Smith</h4></span>
-                    <span><p>Athlete</p></span>
-                  </div>
-                  <div class="clearfix"></div>
-                  <hr style="margin:5px 0 5px 0;">
-
-
-
-        <div id="{{user.profile.id}}">
-        <div class="col-sm-5 col-xs-6 tital " ><b>Username:</b></div><div class="col-sm-7 col-xs-6 "contenteditable='true'>{{ user.username }}</div>
-        <div class="col-sm-5 col-xs-6 tital " ><b>Email:</b></div><div class="col-sm-7"contenteditable='true'>{{ user.profile.email }}</div>
-        <div class="col-sm-5 col-xs-6 tital "><b>Date of Birth:</b></div><div class="col-sm-7"contenteditable='true'> {{ user.profile.dob }}</div>
-        <div class="col-sm-5 col-xs-6 tital " ><b>Gender:</b></div><div class="col-sm-7"contenteditable='true'>{{ user.profile.gender }}</div>
-        <div class="col-sm-5 col-xs-6 tital " ><b>Hobbies:</b></div><div class="col-sm-7"contenteditable='true'>{{ user.profile.hobbies }}</div>
-      </div>
+                                    <br>
+                                    {% csrf_token %}
+                                    <!-- /input-group -->
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 style="color:#00b1b1;">{{user.username}}</h4></span>
+                                    <span>
+                                        <p>Welcome to {{appname}}</p>
+                                    </span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <hr style="margin:5px 0 5px 0;">
 
 
-        <br><br>
 
-<div class=updateBtn id=update_button><input type="submit" value="Submit"></div>
-                  <!-- /.box-body -->
+                                <div id="{{user.profile.id}}">
+                                    <div class="col-sm-5 col-xs-6 tital "><b>Username:</b></div>
+                                    <div class="col-sm-7 col-xs-6 " contenteditable='true'>{{ user.username }}</div>
+                                    <div class="col-sm-5 col-xs-6 tital "><b>Email:</b></div>
+                                    <div class="col-sm-7" contenteditable='true'>{{ user.profile.email }}</div>
+                                    <div class="col-sm-5 col-xs-6 tital "><b>Date of Birth:</b></div>
+                                    <div class="col-sm-7" contenteditable='true'> {{ user.profile.dob }}</div>
+                                    <div class="col-sm-5 col-xs-6 tital "><b>Gender:</b></div>
+                                    <div class="col-sm-7" contenteditable='true'>{{ user.profile.gender }}</div>
+                                    <div class="col-sm-5 col-xs-6 tital "><b>Hobbies:</b></div>
+                                    <div class="col-sm-7" contenteditable='true'>#</div>
+                                </div>
+
+
+                                <br><br>
+
+                                <div class=updateBtn id=update_button><input type="submit" value="Save"></div>
+                                <!-- /.box-body -->
+                            </div>
+
+                            <!-- /.box -->
+
+                        </div>
+
+
+                    </div>
                 </div>
+            </div>
+            <script>
 
-                <!-- /.box -->
-
-              </div>
+            </script>
 
 
-          </div>
-          </div>
+
+
+
+
+
+
+
         </div>
-          <script>
+    </div>
 
-                    </script>
-
-
-
-
-
-
-
-
-
-         </div>
 </div>
-
-  </div>
 </form>
 {% endblock %}

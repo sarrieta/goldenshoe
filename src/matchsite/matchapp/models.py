@@ -5,6 +5,7 @@ from django.db import models
 # the 'hobbies' ManyToMany relationship between Members
 # Pre-defined hobbies to be entered into the database
 
+
 class Hobby(models.Model):
     # Given hobby [LIST]
     # Tennis, basketball, running, gym etc
@@ -14,7 +15,8 @@ class Hobby(models.Model):
         return self.hobby
 
 # Django's User model allows for Members to inherit
-# username and password 
+# username and password
+
 
 class Member(User):
     hobbies = models.ManyToManyField(
@@ -31,6 +33,7 @@ class Member(User):
 
     def __str__(self):
         return self.username
+
 
 class Profile(models.Model):
     user = models.OneToOneField(
@@ -51,7 +54,3 @@ class Profile(models.Model):
 
     def __str__(self):
         return str(self.user)
-
-
-
-
