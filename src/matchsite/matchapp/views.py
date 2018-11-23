@@ -105,7 +105,7 @@ def login(request):
 
                 else:
                     raise Http404('User or password is incorrect')
-
+                    #return render(request,'matchapp/index.html', {'message':'Invalid Password','form': form})
     else:
         return render(request,'matchapp/index.html')
 
@@ -144,8 +144,8 @@ def filter(request, user):
 def displayProfile(request, user):
 	#query users login
 	form = UserProfile()
-	Member.objects.get(user=username)
-	return render(request, 'matchapp/displayProfile.html', {'form': form})
+	user = Member.objects.get(user=username)
+	return render(request, 'matchapp/displayProfile.html', {'form': form, 'user':user})
 	"""try:
 
 	if form.is_valid():
