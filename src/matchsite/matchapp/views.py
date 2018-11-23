@@ -93,7 +93,7 @@ def login(request):
                 password = form.cleaned_data.get("password")
 
                 user = authenticate(username=username, password=password)
-				
+
                 if user is not None:
                     if user.is_active:
                         request.session['username'] = username
@@ -102,7 +102,7 @@ def login(request):
                         return render(request,'matchapp/displayProfile.html', {'form': form})
 
                 #return HttpResponse("<span> User or password is wrong </span")
-                
+
                 else:
                     raise Http404('User or password is incorrect')
 
@@ -127,8 +127,8 @@ def similarHobbies(request, user):
     hobbies = common.annotate(hob_count=Count('hobbies'))
     # Process the matches in decending
     match = hobbies.filter(hob_count__gt=1).order_by('-hob_count')
-    
-    context = { 
+
+    context = {
         'appname' : appname,
         'matches' : match,
         'loggedIn': True
