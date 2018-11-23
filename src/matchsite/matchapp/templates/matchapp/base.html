@@ -26,7 +26,12 @@
         /*background: linear-gradient(to bottom, #FFA69E 0%, #861657 100%);*/
          background: pink;
     }
+    div.updateBtn {
 
+        text-align: center;
+        
+
+    }
     div.container_register {
 
         width: 400px;
@@ -95,8 +100,8 @@
       <!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
       <br><br><br><br><br><br>
 
-      <a href="{% url 'editProfile' %}">Edit Profile</a>
-      <a href="{% url 'displayProfile' %}">View Profile</a>
+
+      <a href="{% url 'displayProfile' %}">Profile</a>
       <a href="{% url 'similarHobbies' %}">Matches</a>
       <a href="{% url 'logout' %}">Log out</a>
  </div>
