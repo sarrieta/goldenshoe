@@ -119,6 +119,13 @@ def logout(request,user):
 #order of most common hobbies first
 @loggedin
 def similarHobbies(request, user):
+    Member.objects.filter()
+
+	"""exclude guy logged in 
+	filter hobbies on every user 
+	hobbies check if its in logged in usern
+	annotate that in a count and order that"""
+
 	return HttpResponse("return list of people with similar hobbies")
 
 #filter button on similarHobbies page which generates
