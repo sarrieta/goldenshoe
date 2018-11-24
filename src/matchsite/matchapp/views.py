@@ -4,6 +4,9 @@ from django.http import HttpResponse, Http404
 from matchapp.models import Member, Profile, Hobby
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate
+from django.http import JsonResponse
+from django.http import QueryDict
+from django.views.decorators.csrf import csrf_exempt
 from .forms import *
 
 # REST imports
@@ -172,17 +175,20 @@ def filter(request, user):
 @loggedin
 def displayProfile(request, user):
 	# query users login
-    form = UserProfile()
-    person = Member.objects.get(id=user.id); print(person)
-    hobby = Hobby.objects.all()
 
-    context = {
-        'appname':appname,
-        'form': form,
-        'user': person,
-        'hobbies': hobby
-    }
-    return render(request, 'matchapp/displayProfile.html', context)
+    if request.method == "GET":
+        form = UserProfile()
+        person = Member.objects.get(id=user.id); print(person)
+        hobby = Hobby.objects.all()
+
+        context = {
+            'appname':appname,
+            'form': form,
+            'user': person,
+            'hobbies': hobby
+        }
+
+        return render(request, 'matchapp/displayProfile.html', context)
 """try:
 
 if form.is_valid():
@@ -195,23 +201,51 @@ if form.is_valid():
 # https://stackoverflow.com/questions/29246468/django-how-can-i-update-the-profile-pictures-via-modelform
 # https://stackoverflow.com/questions/5871730/need-a-minimal-django-file-upload-example
 
+@csrf_exempt
 @loggedin
 def editProfile(request, user):
-
-	"""if request.method = "POST":
+    if request.method == "POST":
 		# editProfileForm = class in forms.py
-	    form = editProfileForm(request.POST,request.FILES,instance=user)
+        #form = UserProfile(request.POST,request.FILES,instance=user)
+
+        form = UserProfile(request.POST)
+        print("Form errors: " + str(form.errors))
 
         if form.is_valid():
+            member = Member.objects.get(id = user.id)
+            profile = Profile.objects.get(user = user)
+            data = QueryDict(request.body)
+            member_hobbies = data.get("hobbies")
+            member.save()
+            profile_gender = data.get("gender")
+            profile.save()
+            profile_dob = data.get("dob")
+            profile.save()
+            profile_email = data.get("email")
+            profile.save()
+        
+            response = {
+                'hobbies': member_hobbies,
+                'gender': profile_gender,
+                'dob': profile_dob, 
+                'email': profile_email
+            }
+
+            return JsonResponse(response, safe = False)
+        
+
+        """if form.is_valid():
 			# file is the name given in forms
-			if 'file' in request.FILES:
-				file = request.FILES['file']
+            if 'file' in request.FILES:
+                file = request.FILES['file']
 
-			form.save();
-			return render(request, 'matchapp/editProfile.html', {'form': form})
+            form.save();
+            return render(request, 'matchapp/editProfile.html', {'form': form})
 
-		else:
-			form = editProfileForm(instance=user)
-			return render(request, 'matchapp/editProfile.html', {'form': form})"""
+        else:
+            form = editProfileForm(instance=user)
+            return render(request, 'matchapp/editProfile.html', {'form': form})"""
 
-	# return HttpResponse("user should be able to edit page")
+    else:
+        print("dont post")
+        return HttpResponse("hey")

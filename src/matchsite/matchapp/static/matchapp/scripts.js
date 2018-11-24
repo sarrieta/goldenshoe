@@ -24,8 +24,42 @@ $(".profile").click(function(event){
 	$.ajax({
 		type: "GET",
 		url: "/displayProfile", 
-		success: 
-		console.log("test")
+	})
+	
+});
+
+})
+
+$(document).ready(function(){ 
+
+$("#update_button").click(function(event){
+	event.preventDefault();
+	username = $('#username').text()
+	email = $('#email').text()
+	dob = $('#dob').text()
+	gender = $('#gender').text()
+	hobbies = $('#hobbies').text()
+	$.ajax({
+		type: "POST",
+		data: 
+		{
+			username: username,
+			email: email,
+			dob: dob,
+			gender: gender,
+			hobbies: hobbies
+		},
+		url: "/editProfile/",
+		dataType: 'application/json',
+        success: function(data) {
+					data=JSON.stringify(data)
+					data=JSON.parse(data)
+					$("#username").html(data.username)
+					$("#email").html(data.email)
+					$("#dob").html(data.dob)
+					$("#gender").html(data.gender)
+					$("#hobbies").html(data.hobbies)
+				}
 
 	})
 	
