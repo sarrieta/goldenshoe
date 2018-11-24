@@ -18,7 +18,7 @@ urlpatterns = [
     # displays profile
     path('displayProfile/', views.displayProfile, name='displayProfile'),
     # login page
-    #path('home/', views.login, name='login'),
+    path('home/', views.login, name='login'),
     # logout page
     path('logout/', views.logout, name='logout'),
     # similar hobbies

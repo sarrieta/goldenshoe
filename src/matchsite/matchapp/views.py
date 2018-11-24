@@ -111,8 +111,18 @@ def login(request):
                     if user.is_active:
                         request.session['username'] = username
                         request.session['password'] = password
+                        form = UserProfile()
+                        person = Member.objects.get(id=user.id); print(person)
+                        hobby = Hobby.objects.all()
+
+                        context = {
+                            'appname':appname,
+                            'form': form,
+                            'user': person,
+                            'hobbies': hobby
+                        }
 						# login(request,user)
-                        return render(request, 'matchapp/displayProfile.html', {'form': form})
+                        return render(request, 'matchapp/displayProfile.html', context)
 
                 # return HttpResponse("<span> User or password is wrong </span")
 

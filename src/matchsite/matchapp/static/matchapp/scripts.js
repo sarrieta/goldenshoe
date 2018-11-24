@@ -14,6 +14,22 @@ $(function() {
     });
 });
 
-
-
 ///password regesxvalidation ends
+
+//when user logs in the profile page displays
+$(document).ready(function(){ 
+
+$(".profile").click(function(event){
+	event.preventDefault();
+	$.ajax({
+		type: "GET",
+		url: "/displayProfile", 
+		success: 
+		console.log("test")
+
+	})
+	
+});
+
+})
+
