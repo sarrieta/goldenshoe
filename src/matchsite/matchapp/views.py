@@ -115,14 +115,15 @@ def login(request):
                         request.session['username'] = username
                         request.session['password'] = password
                         form = UserProfile()
-                        person = Member.objects.get(id=user.id); print(person)
+                        person = Member.objects.get(id=user.id)
                         hobby = Hobby.objects.all()
 
                         context = {
                             'appname':appname,
                             'form': form,
                             'user': person,
-                            'hobbies': hobby
+                            'hobbies': hobby,
+                            'loggedIn': True
                         }
 						# login(request,user)
                         return render(request, 'matchapp/displayProfile.html', context)
@@ -185,7 +186,8 @@ def displayProfile(request, user):
             'appname':appname,
             'form': form,
             'user': person,
-            'hobbies': hobby
+            'hobbies': hobby,
+            'loggedIn': True
         }
 
         return render(request, 'matchapp/displayProfile.html', context)
@@ -204,48 +206,32 @@ if form.is_valid():
 @csrf_exempt
 @loggedin
 def editProfile(request, user):
-    if request.method == "POST":
-		# editProfileForm = class in forms.py
-        #form = UserProfile(request.POST,request.FILES,instance=user)
+    
+    
+    # Profile : GENDER , EMAIL , [can add a hobby to the member] 
+    # Member : list of hobbies
 
-        form = UserProfile(request.POST)
-        print("Form errors: " + str(form.errors))
+    if request.method == "PUT":
+        try: member = Member.objects.get(id=user.id)
+        except Member.DoesNotExist: raise Http404("Member does not exist")        
+        profile = Profile.objects.get(user=member.id)
 
-        if form.is_valid():
-            member = Member.objects.get(id = user.id)
-            profile = Profile.objects.get(user = user)
-            data = QueryDict(request.body)
-            member_hobbies = data.get("hobbies")
-            member.save()
-            profile_gender = data.get("gender")
-            profile.save()
-            profile_dob = data.get("dob")
-            profile.save()
-            profile_email = data.get("email")
-            profile.save()
+        data = QueryDict(request.body)
         
-            response = {
-                'hobbies': member_hobbies,
-                'gender': profile_gender,
-                'dob': profile_dob, 
-                'email': profile_email
-            }
-
-            return JsonResponse(response, safe = False)
+        profile.gender = data['gender']
+        profile.email = data['email']
+        profile.dob = data['dob']
+        profile.save()
         
 
-        """if form.is_valid():
-			# file is the name given in forms
-            if 'file' in request.FILES:
-                file = request.FILES['file']
+        # Need to think how to store the hobbies for the user
 
-            form.save();
-            return render(request, 'matchapp/editProfile.html', {'form': form})
+        response = {
+            'gender': profile.gender,
+            'dob': profile.dob, 
+            'email': profile.email
+        }
 
-        else:
-            form = editProfileForm(instance=user)
-            return render(request, 'matchapp/editProfile.html', {'form': form})"""
-
+        return JsonResponse(response)
     else:
-        print("dont post")
-        return HttpResponse("hey")
+        raise Http404("PUT request was not used")
