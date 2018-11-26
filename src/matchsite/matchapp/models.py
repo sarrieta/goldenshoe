@@ -42,8 +42,8 @@ class Profile(models.Model):
         null=True,
         on_delete=models.CASCADE
     )
-
-    image = models.ImageField(upload_to='profile_images')
+    image = models.ImageField(upload_to='profile_images',
+                              default='default.jpg')
     email = models.EmailField()
     GENDER_CHOICES = (
         ('M', 'Male'),
@@ -53,4 +53,4 @@ class Profile(models.Model):
     dob = models.DateField(max_length=8, null=True)
 
     def __str__(self):
-        return str(self.user)
+        return f'{self.user.username} Profile'

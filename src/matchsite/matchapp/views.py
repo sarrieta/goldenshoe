@@ -157,6 +157,7 @@ def similarHobbies(request, user):
     # Get the number of hobbies of other users
     hobbies = common.annotate(hob_count=Count('hobbies'))
     # Process the matches in decending
+    # Note to self do not need the gt thing check first
     match = hobbies.filter(hob_count__gt=1).order_by('-hob_count')
 
     context = {
@@ -179,7 +180,7 @@ def displayProfile(request, user):
 
     if request.method == "GET":
         form = UserProfile()
-        person = Member.objects.get(id=user.id); print(person)
+        person = Member.objects.get(id=user.id)
         hobby = Hobby.objects.all()
 
         context = {
@@ -222,9 +223,15 @@ def editProfile(request, user):
         profile.email = data['email']
         profile.dob = data['dob']
         profile.save()
-        
 
-        # Need to think how to store the hobbies for the user
+        hobbies = data['hobbies']
+        hobbies = hobbies.split(" ")
+
+
+        #if hobbies not ''
+        #   for hobby in hobbies:
+        #       member.hobbies.add(Hobby.objects.get(hobby=hobby))
+        #       member.save()
 
         response = {
             'gender': profile.gender,
@@ -235,3 +242,16 @@ def editProfile(request, user):
         return JsonResponse(response)
     else:
         raise Http404("PUT request was not used")
+
+@loggedin
+def upload_image(request, user):
+    print("out here")
+    member = Member.objects.get(id=user.id)
+    profile = Profile.objects.get(user = member.id)
+    if 'profile-image-upload' in request.FILES:
+        image_file = request.FILES['profile-image-upload']
+        profile.image = image_file
+        profile.save()
+        return HttpResponse(user.profile.image.url)
+    else:
+        raise Http404('Image file not received')
