@@ -203,6 +203,7 @@ if form.is_valid():
 # https://stackoverflow.com/questions/29246468/django-how-can-i-update-the-profile-pictures-via-modelform
 # https://stackoverflow.com/questions/5871730/need-a-minimal-django-file-upload-example
 
+#remove csrf_exempt
 @csrf_exempt
 @loggedin
 def editProfile(request, user):
@@ -218,20 +219,42 @@ def editProfile(request, user):
 
         data = QueryDict(request.body)
         
+        #debugging to see if there's anything in request.files but is empty as of 26/11/2018 20:13 :@
+        print("request.FILES: " + str(request.FILES))
+
+        #not going to this if statement
+        #id for the file type in html
+        if 'profile-image-upload' in request.FILES:
+            upload_image = request.FILES['profile-image-upload']
+            profile.image = upload_image
+            profile.save()
+            return JsonResponse({'message': 'Uploaded Successfully'})
+
+        else:
+        	return JsonResponse({'message': 'Error while uploading file'})
+
         profile.gender = data['gender']
         profile.email = data['email']
         profile.dob = data['dob']
+       
         profile.save()
+
+        response = {
+             'gender': profile.gender,
+             'dob': profile.dob, 
+             'email': profile.email
+
+        }
+        return JsonResponse(response)
+
+
         
 
         # Need to think how to store the hobbies for the user
 
-        response = {
-            'gender': profile.gender,
-            'dob': profile.dob, 
-            'email': profile.email
-        }
+        
 
-        return JsonResponse(response)
+        #return JsonResponse(response)
+
     else:
         raise Http404("PUT request was not used")
