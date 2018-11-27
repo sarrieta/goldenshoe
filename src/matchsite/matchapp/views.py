@@ -165,7 +165,7 @@ def similarHobbies(request, user):
         'matches': match,
         'loggedIn': True
         }
-    return render(request, '#', context)
+    return render(request, 'matchapp/matches.html', context)
 
 # filter button on similarHobbies page which generates
 
@@ -199,7 +199,7 @@ if form.is_valid():
 	email = form.cleaned_data.get("email")
 	gender = form.cleaned_data.get("gender")
 	dob = dorm.cleaned_data.get("dob")"""
-      
+
 # user profile edit page
 # https://stackoverflow.com/questions/29246468/django-how-can-i-update-the-profile-pictures-via-modelform
 # https://stackoverflow.com/questions/5871730/need-a-minimal-django-file-upload-example
@@ -208,18 +208,18 @@ if form.is_valid():
 @csrf_exempt
 @loggedin
 def editProfile(request, user):
-    
-    
-    # Profile : GENDER , EMAIL , [can add a hobby to the member] 
+
+
+    # Profile : GENDER , EMAIL , [can add a hobby to the member]
     # Member : list of hobbies
 
     if request.method == "PUT":
         try: member = Member.objects.get(id=user.id)
-        except Member.DoesNotExist: raise Http404("Member does not exist")        
+        except Member.DoesNotExist: raise Http404("Member does not exist")
         profile = Profile.objects.get(user=member.id)
 
         data = QueryDict(request.body)
-        
+
         #debugging to see if there's anything in request.files but is empty as of 26/11/2018 20:13 :@
         print("request.FILES: " + str(request.FILES))
 
@@ -237,19 +237,19 @@ def editProfile(request, user):
         profile.gender = data['gender']
         profile.email = data['email']
         profile.dob = data['dob']
-       
+
         profile.save()
 
         response = {
              'gender': profile.gender,
-             'dob': profile.dob, 
+             'dob': profile.dob,
              'email': profile.email
 
         }
         return JsonResponse(response)
 
 
-        
+
 
         hobbies = data['hobbies']
         hobbies = hobbies.split(" ")
@@ -260,7 +260,7 @@ def editProfile(request, user):
         #       member.hobbies.add(Hobby.objects.get(hobby=hobby))
         #       member.save()
 
-        
+
 
         #return JsonResponse(response)
 
