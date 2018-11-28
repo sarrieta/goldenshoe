@@ -188,7 +188,7 @@ def similarHobbies(request, user):
         'matches': match,
         'loggedIn': True
         }
-    return render(request, 'matchapp/matches.html', context)
+    return render(request, 'matchapp/hobbies.html', context)
 
 # filter button on similarHobbies page which generates
 
