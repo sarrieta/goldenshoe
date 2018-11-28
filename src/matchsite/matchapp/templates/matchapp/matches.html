@@ -1,7 +1,8 @@
 {% extends 'matchapp/base.html' %}
 {% load static %}
-
 {% block content %}
+<<<<<<< HEAD
+=======
 <style>
 body {
            font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -263,6 +264,7 @@ body {
            }
        }
 </style>
+>>>>>>> 5af84ef35ce51f28af8583134c79577ea423af35
 
 <div id="mySidenav" class="sidenav">
     <!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
@@ -287,6 +289,21 @@ body {
 
 {% for match in matches %}
 <div id="{{matches.profile.id}}">
+<<<<<<< HEAD
+    <div ><b>Username:</b></div>
+    <div>{{ matches.username }}</div>
+    <div><b>Email:</b></div>
+    <div> matches.profile.email }}</div>
+    <div><b>Date of Birth:</b></div>
+    <div> {{ matches.profile.dob }}</div>
+    <div>><b>Gender:</b></div>
+    <div>{{ user.profile.gender }}</div>
+    <div><b>Hobbies:</b></div>
+    <div>{{ matches.hobbies }}</div>
+</div>
+{% endfor %}
+
+=======
 
     <div class="col-sm-5 col-xs-6 tital "><b>Username:</b></div>
     <div class="col-sm-7 col-xs-6 "  id = "username">{{ match.username }}</div>
@@ -303,4 +320,5 @@ body {
 
 
 
+>>>>>>> 5af84ef35ce51f28af8583134c79577ea423af35
 {% endblock %}
