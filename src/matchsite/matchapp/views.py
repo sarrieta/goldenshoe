@@ -177,7 +177,6 @@ def filter(request, user):
 @loggedin
 def displayProfile(request, user):
 	# query users login
-
     if request.method == "GET":
         form = UserProfile()
         person = Member.objects.get(id=user.id)
@@ -220,24 +219,13 @@ def editProfile(request, user):
 
         data = QueryDict(request.body)
         
-        #debugging to see if there's anything in request.files but is empty as of 26/11/2018 20:13 :@
-        print("request.FILES: " + str(request.FILES))
-
-        #not going to this if statement
-        #id for the file type in html
-        if 'profile-image-upload' in request.FILES:
-            upload_image = request.FILES['profile-image-upload']
-            profile.image = upload_image
-            profile.save()
-            return JsonResponse({'message': 'Uploaded Successfully'})
-
-        else:
-        	return JsonResponse({'message': 'Error while uploading file'})
-
         profile.gender = data['gender']
         profile.email = data['email']
         profile.dob = data['dob']
        
+        # Need to make sure to save the hobbies
+        # to the user
+
         profile.save()
 
         response = {
@@ -248,22 +236,6 @@ def editProfile(request, user):
         }
         return JsonResponse(response)
 
-
-        
-
-        hobbies = data['hobbies']
-        hobbies = hobbies.split(" ")
-
-
-        #if hobbies not ''
-        #   for hobby in hobbies:
-        #       member.hobbies.add(Hobby.objects.get(hobby=hobby))
-        #       member.save()
-
-        
-
-        #return JsonResponse(response)
-
     else:
         raise Http404("PUT request was not used")
 
@@ -272,10 +244,10 @@ def upload_image(request, user):
     print("out here")
     member = Member.objects.get(id=user.id)
     profile = Profile.objects.get(user = member.id)
-    if 'profile-image-upload' in request.FILES:
-        image_file = request.FILES['profile-image-upload']
+    if 'img_file' in request.FILES:
+        image_file = request.FILES['img_file']
         profile.image = image_file
         profile.save()
-        return HttpResponse(user.profile.image.url)
+        return HttpResponse(profile.image.url)
     else:
         raise Http404('Image file not received')
