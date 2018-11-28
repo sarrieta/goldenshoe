@@ -273,16 +273,18 @@ def editProfile(request, user):
     else:
         raise Http404("PUT request was not used")
 
+@csrf_exempt
 @loggedin
 def upload_image(request, user):
-    print("out here")
     member = Member.objects.get(id=user.id)
     profile = Profile.objects.get(user = member.id)
-    if 'profile-image-upload' in request.FILES:
-        image_file = request.FILES['profile-image-upload']
+    print(request.POST)
+    if 'file' in request.FILES:
+        image_file = request.FILES['file']
         profile.image = image_file
-        profile.save()
+        print(user.profile.image.url)
+        #profile.save()
         return HttpResponse(user.profile.image.url)
     else:
-        raise Http404('Image file not received')
+        return HttpResponse("test")
     
