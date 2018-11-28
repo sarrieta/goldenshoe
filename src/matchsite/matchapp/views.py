@@ -35,8 +35,13 @@ appname = 'matchapp'
 
 def index(request):
 	# Render the index page
-	form = UserLogInForm()
-	return render(request, 'matchapp/index.html', {'form': form})
+    form = UserLogInForm()
+    if 'username' in request.session:
+        return redirect('displayProfile')
+	
+    return render(request, 'matchapp/index.html', {'form': form})
+    
+
 
 # user logged in
 
@@ -89,18 +94,18 @@ def register(request):
             user = Member(username=username)
             user.set_password(password)
 
-            try: user.save()
-            except IntegrityError: #raise Http404('Username '+ str(user)+' already taken: Username must be unique')
+            try:user.save()     
+            except IntegrityError: raise Http404('Username '+ str(user)+' already taken: Username must be unique')
 
 			#return redirect('index')
-
-             context = {
+            context = {
                  'appname':appname,
                  'form': form,
                  'error':'Username '+ str(user) +' already taken: Usernames must be unique',
                  }
             # login(request,user)
             return render(request, 'matchapp/register.html', context)
+
 
      else:
         form = UserRegForm()
@@ -188,11 +193,15 @@ def similarHobbies(request, user):
     # Note to self do not need the gt thing check first
     match = hobbies.filter(hob_count__gt=1).order_by('-hob_count')
 
+
+    #print(Member.objects.filter(hobbies__in=user.hobbies.all()))
+
     context = {
         'appname': appname,
         'matches': match,
         'loggedIn': True
         }
+
     return render(request, 'matchapp/matches.html', context)
 
 # filter button on similarHobbies page which generates
