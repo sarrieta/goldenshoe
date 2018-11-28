@@ -8,6 +8,8 @@ from django.http import JsonResponse
 from django.http import QueryDict
 from django.views.decorators.csrf import csrf_exempt
 from .forms import *
+from django.db import IntegrityError
+from django.shortcuts import render_to_response
 
 # REST imports
 from rest_framework import viewsets
@@ -72,28 +74,36 @@ def register(request):
 
 	# form = UserRegForm()
 
-	if request.method == "POST":
+     if request.method == "POST":
 		# form_class is class of form name NEED TO CHANGE
-		form = UserRegForm(request.POST)
+        form = UserRegForm(request.POST)
 
-		if form.is_valid():
+        if form.is_valid():
 
 			# user = form.save(commit=False)
 			# normalized data
-			username = form.cleaned_data['username']
-			password = form.cleaned_data['password']
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
 
-			user = Member(username=username)
-			user.set_password(password)
+            user = Member(username=username)
+            user.set_password(password)
 
-			try: user.save()
-			except IntegrityError: raise Http404('Username '+user+' already taken: Usernames must be unique')
+            try: user.save()
+            except IntegrityError: #raise Http404('Username '+ str(user)+' already taken: Username must be unique')
 
-			return redirect('index')
+			#return redirect('index')
 
-	else:
-		form = UserRegForm()
-		return render(request, 'matchapp/register.html', {'form': form})
+             context = {
+                 'appname':appname,
+                 'form': form,
+                 'error':'Username '+ str(user) +' already taken: Usernames must be unique',
+                 }
+            # login(request,user)
+            return render(request, 'matchapp/register.html', context)
+
+     else:
+        form = UserRegForm()
+        return render(request, 'matchapp/register.html', {'form': form})
 
 # this occurs when user presses login button from index
 
@@ -131,8 +141,15 @@ def login(request):
                 # return HttpResponse("<span> User or password is wrong </span")
 
                 else:
-                    raise Http404('User or password is incorrect')
-                    # return render(request,'matchapp/index.html', {'message':'Invalid Password','form': form})
+                    #raise Http404('User or password is incorrect')
+                    context = {
+                        'appname':appname,
+                        'form': form,
+                        'error':'User or password entered is incorrect'
+                    }
+                    # login(request,user)
+                    return render(request, 'matchapp/login.html', context)
+
     else:
         return render(request, 'matchapp/index.html')
 

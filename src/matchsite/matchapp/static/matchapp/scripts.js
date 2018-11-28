@@ -93,6 +93,13 @@ $(document).ready(function () {
                 error: console.log($('#profile-image-upload'))
             })
 
+<<<<<<< HEAD
+        }
+        //send file with ajax
+      
+
+=======
+>>>>>>> bd7a171caf3ef31bc97762b0dee7a382125cb709
 
     
     });

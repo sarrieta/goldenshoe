@@ -264,24 +264,25 @@ body {
 
 
     <a class = "profile" href="{% url 'displayProfile' %}" name = "displayProfile">Profile</a>
-    <a href="{% url 'similarHobbies' %}">Matches</a>
-    <a href="{% url 'logout' %}">Log out</a>
+    <a href="{% url 'similarHobbies' %}" name = "similarHobbies" >Matches</a>
+    <a href="{% url 'logout' %}" name = "logout">Log out</a>
 </div>
 
-{% for matches in matches %}
-<div id="{{user.profile.id}}">
+
+{% for match in matches %}
+<div id="{{matches.profile.id}}">
     <div class="col-sm-5 col-xs-6 tital "><b>Username:</b></div>
-    <div class="col-sm-7 col-xs-6 " contenteditable='true' id = "username">{{ user.username }}</div>
+    <div class="col-sm-7 col-xs-6 " contenteditable='true' id = "username">{{ matches.username }}</div>
     <div class="col-sm-5 col-xs-6 tital "><b>Email:</b></div>
-    <div class="col-sm-7" contenteditable='true' id = "email">{{ user.profile.email }}</div>
+    <div class="col-sm-7" contenteditable='true' id = "email">{{ matches.profile.email }}</div>
     <div class="col-sm-5 col-xs-6 tital "><b>Date of Birth:</b></div>
-    <div class="col-sm-7" contenteditable='true' id = "dob"> {{ user.profile.dob }}</div>
+    <div class="col-sm-7" contenteditable='true' id = "dob"> {{ matches.profile.dob }}</div>
     <div class="col-sm-5 col-xs-6 tital "><b>Gender:</b></div>
     <div class="col-sm-7" contenteditable='true' id = "gender">{{ user.profile.gender }}</div>
     <div class="col-sm-5 col-xs-6 tital "><b>Hobbies:</b></div>
-    <div class="col-sm-7" contenteditable='true' id = "hobbies"></div>
+    <div class="col-sm-7" contenteditable='true' id = "hobbies">{{ matches.hobbies }}</div>
 </div>
-{% endFor %}
+{% endfor %}
 
 
 
