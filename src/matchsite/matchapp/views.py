@@ -43,13 +43,14 @@ def index(request):
 
 def loggedin(view):
     def mod_view(request):
+        form = UserLogInForm()
         if 'username' in request.session:
             username = request.session['username']
             try: user = Member.objects.get(username=username)
             except Member.DoesNotExist: raise Http404('Member does not exist')
             return view(request, user)
         else:
-            return render(request, 'mainapp/not-logged-in.html', {})
+            return render(request, 'matchapp/index.html', {'form': form})
     return mod_view
 
 # terms and conditions
@@ -142,6 +143,8 @@ def login(request):
                             'loggedIn': True
                         }
 						# login(request,user)
+
+                        #where should it go after user logged in?
                         return render(request, 'matchapp/displayProfile.html', context)
 
                 # return HttpResponse("<span> User or password is wrong </span")
@@ -154,10 +157,16 @@ def login(request):
                         'error':'User or password entered is incorrect'
                     }
                     # login(request,user)
-                    return render(request, 'matchapp/login.html', context)
-
+                    return render(request, 'matchapp/index.html', context)
+    
     else:
-        return render(request, 'matchapp/index.html')
+        form = UserLogInForm()
+        context = {
+        'appname':appname,
+        'form': form,
+        'loggedIn': True
+        }
+        return render(request, '', context)
 
 # render logout page
 
@@ -279,15 +288,21 @@ def editProfile(request, user):
     else:
         raise Http404("PUT request was not used")
 
+@csrf_exempt
 @loggedin
 def upload_image(request, user):
-    print("out here")
     member = Member.objects.get(id=user.id)
     profile = Profile.objects.get(user = member.id)
-    if 'profile-image-upload' in request.FILES:
-        image_file = request.FILES['profile-image-upload']
+    if 'file' in request.FILES:
+        image_file = request.FILES['file']
         profile.image = image_file
-        profile.save()
+        print(user.profile.image.url)
+        #profile.save()
         return HttpResponse(user.profile.image.url)
     else:
+<<<<<<< HEAD
         raise Http404('Image file not received')
+=======
+        return HttpResponse("test")
+    
+>>>>>>> 5af84ef35ce51f28af8583134c79577ea423af35

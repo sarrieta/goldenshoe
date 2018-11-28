@@ -69,19 +69,19 @@ $(document).ready(function () {
 
 //Save image file via ajax request
 /*$(document).ready(function () {
-    formdata = new FormData();
     $("#profile-image-upload").on("change", function(){
         //event.preventDefault();
-
+        var formdata = new FormData();
         //get file from form
         var file = $('#profile-image-upload')[0].files[0];
-        //var image = new FormData($('#profile-image-upload')[0]);
+        formdata.append('profile-image-upload', file);
+        formdata.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
 
         //if(formdata){
             //formdata.append("image", file);
             $.ajax({
-                url: "/editProfile/",
-                type: "PUT",
+                url: "/uploadimage/",
+                type: "POST",
                 data: file,
                 // Tell jQuery not to process data or worry about content-type
                 cache: false,
@@ -90,19 +90,38 @@ $(document).ready(function () {
                 success: function (data) {
                     console.log(data)
                 },
-                error: console.log($('#profile-image-upload'))
+                error: console.log(file)
             })
-
-<<<<<<< HEAD
-        }
-        //send file with ajax
-      
-
-=======
->>>>>>> bd7a171caf3ef31bc97762b0dee7a382125cb709
 
     
     });
 
 });*/
+
+$(function () {
+$('#profile-image-upload').change(function uploadFile() {
+   //$('#progressBar').show();
+   var formdata = new FormData();
+   var file = $('#profile-image-upload')[0].files[0];
+   formdata.append('profile-image-upload', file);
+   formdata.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
+   $.ajax({
+      xhr: function () {
+         var xhr = new window.XMLHttpRequest();
+         xhr.upload.addEventListener('progress', progressHandler, false);
+         xhr.addEventListener('load', completeHandler, false);
+         return xhr;
+      },
+      type : 'POST',
+      url  : '/uploadimage/',
+      data : formdata,
+      success: function(data) {
+         alert("test")
+      },
+      error: alert("dont work"),
+      processData : false,
+      contentType : false,
+   });
+});
+});
 
