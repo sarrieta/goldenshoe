@@ -3,6 +3,15 @@
 
 {% block content %}
 
+<div id="mySidenav" class="sidenav">
+    <!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
+    <br><br><br><br><br><br>
+
+
+    <a class = "profile" href="{% url 'displayProfile' %}" name = "displayProfile">Profile</a>
+    <a href="{% url 'similarHobbies' %}">Matches</a>
+    <a href="{% url 'logout' %}">Log out</a>
+</div>
 
 <div class="container_register">
     <div class="container">
@@ -20,6 +29,7 @@
 
                             <div class="box-body">
                                 <div class="col-sm-6">
+<<<<<<< HEAD
 
 
 
@@ -29,7 +39,14 @@
                                         <progress id="progressBar" value="0" max="100" style="width:150px;display:none;">
                                         </progress>
 
+=======
+                                    <div align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"
+                                            id="profile-image1" class="img-circle img-responsive">
+                                        <form id='upload_form' method='POST' action="{% url 'displayProfile' %}" enctype='multipart/form-data'>
+                                        <input id="profile-image-upload" class="hidden" type="file" name="file">
+>>>>>>> 67cc160e14e76ae4a6f40afc105879b44b9a8b9d
                                         <div style="color:#999;">click here to change profile image</div>
+                                    </form>
                                         <!--Upload Image Js And Css-->
                                     </div>
 
