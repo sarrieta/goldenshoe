@@ -142,7 +142,7 @@ def login(request):
                         return render(request, 'matchapp/displayProfile.html', context)
 
                 # return HttpResponse("<span> User or password is wrong </span")
-
+                
                 else:
                     #raise Http404('User or password is incorrect')
                     context = {
@@ -154,13 +154,14 @@ def login(request):
                     return render(request, 'matchapp/index.html', context)
     
     else:
+        #return displayProfile(request,)
         form = UserLogInForm()
         context = {
         'appname':appname,
         'form': form,
         'loggedIn': True
         }
-        return render(request, '', context)
+        return render(request, 'matchapp/index.html', context)
 
 # render logout page
 
