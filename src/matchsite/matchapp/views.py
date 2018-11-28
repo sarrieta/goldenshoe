@@ -88,29 +88,23 @@ def register(request):
 
             user = Member(username=username)
             user.set_password(password)
-            #user.save()
+
             try: user.save()
-            except:
-                #IntegrityError:
-                #raise Http404('Username '+ str(user)+' already taken: Username must be unique')
+            except IntegrityError: #raise Http404('Username '+ str(user)+' already taken: Username must be unique')
 
 			#return redirect('index')
 
-                context = {
+             context = {
                  'appname':appname,
                  'form': form,
                  'error':'Username '+ str(user) +' already taken: Usernames must be unique',
                  }
             # login(request,user)
-                return render(request, 'matchapp/register.html', context)
-            return redirect('index')
+            return render(request, 'matchapp/register.html', context)
 
      else:
-         context = {
-         'form': UserRegForm()
-         }
-         #return HttpResponse("render this")
-         return render(request, 'matchapp/register.html', context)
+        form = UserRegForm()
+        return render(request, 'matchapp/register.html', {'form': form})
 
 # this occurs when user presses login button from index
 
@@ -158,7 +152,7 @@ def login(request):
                     }
                     # login(request,user)
                     return render(request, 'matchapp/index.html', context)
-
+    
     else:
         #return displayProfile(request,)
         form = UserLogInForm()
@@ -198,7 +192,7 @@ def similarHobbies(request, user):
         'matches': match,
         'loggedIn': True
         }
-    return render(request, 'matchapp/hobbies.html', context)
+    return render(request, 'matchapp/matches.html', context)
 
 # filter button on similarHobbies page which generates
 
@@ -254,7 +248,7 @@ def editProfile(request, user):
         data = QueryDict(request.body)
 
         #debugging to see if there's anything in request.files but is empty
-
+        
 
         profile.gender = data['gender']
         profile.email = data['email']
@@ -301,7 +295,5 @@ def upload_image(request, user):
         #profile.save()
         return HttpResponse(user.profile.image.url)
     else:
-
-        raise Http404('Image file not received')
-
         return HttpResponse("test")
+    
