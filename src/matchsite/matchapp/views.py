@@ -110,7 +110,8 @@ def register(request):
 
 
 def login(request):
-
+    if "username" in request.session:
+        return redirect('displayProfile')
     if request.method == "POST":
         form = UserLogInForm(request.POST)
         if 'username' in request.POST and 'password' in request.POST:
