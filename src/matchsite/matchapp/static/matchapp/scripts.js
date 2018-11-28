@@ -68,61 +68,34 @@ $(document).ready(function () {
 })
 
 //Save image file via ajax request
-$(document).ready(function () {
+/*$(document).ready(function () {
     formdata = new FormData();
-    //$("#profile-image-upload").on("change", function()
-    $("#update_button").click(function (event) {
-        event.preventDefault();
+    $("#profile-image-upload").on("change", function(){
+        //event.preventDefault();
 
         //get file from form
-        var file = this.files;
+        var file = $('#profile-image-upload')[0].files[0];
         //var image = new FormData($('#profile-image-upload')[0]);
 
-        if(formdata){
-            formdata.append("image", file);
+        //if(formdata){
+            //formdata.append("image", file);
             $.ajax({
                 url: "/editProfile/",
                 type: "PUT",
-                data: formdata,
+                data: file,
+                // Tell jQuery not to process data or worry about content-type
+                cache: false,
                 processData: false,
                 contentType: false,
                 success: function (data) {
                     console.log(data)
                 },
-                error: console.log("file is not in server")
+                error: console.log($('#profile-image-upload'))
             })
 
-        }
-        //send file with ajax
-        ////instagram like matches swiping
-        $('#carouselExample').on('slide.bs.carousel', function(e) {
 
-                var $e = $(e.relatedTarget);
-                var idx = $e.index();
-                var itemsPerSlide = 4;
-                var totalItems = $('.carousel-item').length;
-
-                if (idx >= totalItems - (itemsPerSlide - 1)) {
-                    var it = itemsPerSlide - (totalItems - idx);
-                    for (var i = 0; i < it; i++) {
-                        // append slides to end
-                        if (e.direction == "left") {
-                            $('.carousel-item').eq(i).appendTo('.carousel-inner');
-                        } else {
-                            $('.carousel-item').eq(0).appendTo('.carousel-inner');
-                        }
-                    }
-                }
-            });
-
-            $('#carouselExample').carousel({
-                interval: 2000
-            });
-
-
-        ///instgram like matches swiping
-
-
+    
     });
 
-})
+});*/
+

@@ -24,9 +24,6 @@ class UserRegForm(forms.Form):
             "placeholder":"Repeat password",
             "name":"re_password"}))
 
-        
-
-
 
 class UserLogInForm(forms.Form):
         username = forms.CharField(label='Username', min_length=2,max_length=15, widget=forms.TextInput(attrs={
@@ -40,3 +37,5 @@ class UserProfile(forms.Form):
         re_password = forms.CharField(max_length=32, widget=forms.PasswordInput)
         email=forms.EmailField()
         hobbies=forms.CharField(widget=forms.Textarea)
+
+

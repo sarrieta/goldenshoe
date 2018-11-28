@@ -220,19 +220,8 @@ def editProfile(request, user):
 
         data = QueryDict(request.body)
 
-        #debugging to see if there's anything in request.files but is empty as of 26/11/2018 20:13 :@
-        print("request.FILES: " + str(request.FILES))
-
-        #not going to this if statement
-        #id for the file type in html
-        if 'profile-image-upload' in request.FILES:
-            upload_image = request.FILES['profile-image-upload']
-            profile.image = upload_image
-            profile.save()
-            return JsonResponse({'message': 'Uploaded Successfully'})
-
-        else:
-        	return JsonResponse({'message': 'Error while uploading file'})
+        #debugging to see if there's anything in request.files but is empty
+        
 
         profile.gender = data['gender']
         profile.email = data['email']
@@ -279,3 +268,4 @@ def upload_image(request, user):
         return HttpResponse(user.profile.image.url)
     else:
         raise Http404('Image file not received')
+    
