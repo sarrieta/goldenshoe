@@ -158,7 +158,7 @@ def login(request):
                     }
                     # login(request,user)
                     return render(request, 'matchapp/index.html', context)
-    
+
     else:
         form = UserLogInForm()
         context = {
@@ -300,9 +300,7 @@ def upload_image(request, user):
         #profile.save()
         return HttpResponse(user.profile.image.url)
     else:
-<<<<<<< HEAD
+
         raise Http404('Image file not received')
-=======
+
         return HttpResponse("test")
-    
->>>>>>> 5af84ef35ce51f28af8583134c79577ea423af35
