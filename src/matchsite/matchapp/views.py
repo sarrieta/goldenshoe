@@ -191,9 +191,7 @@ def similarHobbies(request, user):
     hobbies = common.annotate(hob_count=Count('hobbies'))
     # Process the matches in decending
     # Note to self do not need the gt thing check first
-    match = hobbies.filter(hob_count__gt=1).order_by('-hob_count')
-
-    test = Member.objects.filter(hobbies__in=user.hobbies.all()).exclude(id=user.id)
+    match = hobbies.order_by('-hob_count')
 
     context = {
         'appname': appname,
@@ -201,7 +199,8 @@ def similarHobbies(request, user):
         'loggedIn': True
         }
 
-    print("users with similar hobbies" + str(test))
+    #print(str(match.profile))
+    print("users with similar hobbies" + str(match))
     return render(request, 'matchapp/matches.html', context)
 
 # filter button on similarHobbies page which generates
