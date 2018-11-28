@@ -68,35 +68,41 @@ $(document).ready(function () {
 })
 
 //Save image file via ajax request
-$(document).ready(function () {
+/*$(document).ready(function () {
     formdata = new FormData();
-    //$("#profile-image-upload").on("change", function()
-    $("#update_button").click(function (event) {
-        event.preventDefault();
+    $("#profile-image-upload").on("change", function(){
+        //event.preventDefault();
 
         //get file from form
-        var file = this.files;
+        var file = $('#profile-image-upload')[0].files[0];
         //var image = new FormData($('#profile-image-upload')[0]);
 
-        if(formdata){
-            formdata.append("image", file);
+        //if(formdata){
+            //formdata.append("image", file);
             $.ajax({
                 url: "/editProfile/",
                 type: "PUT",
-                data: formdata,
+                data: file,
+                // Tell jQuery not to process data or worry about content-type
+                cache: false,
                 processData: false,
                 contentType: false,
                 success: function (data) {
                     console.log(data)
                 },
-                error: console.log("file is not in server")
+                error: console.log($('#profile-image-upload'))
             })
 
+<<<<<<< HEAD
         }
         //send file with ajax
       
 
+=======
+>>>>>>> bd7a171caf3ef31bc97762b0dee7a382125cb709
 
+    
     });
 
-})
+});*/
+
