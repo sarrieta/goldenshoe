@@ -43,13 +43,14 @@ def index(request):
 
 def loggedin(view):
     def mod_view(request):
+        form = UserLogInForm()
         if 'username' in request.session:
             username = request.session['username']
             try: user = Member.objects.get(username=username)
             except Member.DoesNotExist: raise Http404('Member does not exist')
             return view(request, user)
         else:
-            return render(request, 'mainapp/not-logged-in.html', {})
+            return render(request, 'matchapp/index.html', {'form': form})
     return mod_view
 
 # terms and conditions
@@ -136,6 +137,8 @@ def login(request):
                             'loggedIn': True
                         }
 						# login(request,user)
+
+                        #where should it go after user logged in?
                         return render(request, 'matchapp/displayProfile.html', context)
 
                 # return HttpResponse("<span> User or password is wrong </span")
@@ -148,10 +151,16 @@ def login(request):
                         'error':'User or password entered is incorrect'
                     }
                     # login(request,user)
-                    return render(request, 'matchapp/login.html', context)
-
+                    return render(request, 'matchapp/index.html', context)
+    
     else:
-        return render(request, 'matchapp/index.html')
+        form = UserLogInForm()
+        context = {
+        'appname':appname,
+        'form': form,
+        'loggedIn': True
+        }
+        return render(request, '', context)
 
 # render logout page
 
@@ -278,7 +287,6 @@ def editProfile(request, user):
 def upload_image(request, user):
     member = Member.objects.get(id=user.id)
     profile = Profile.objects.get(user = member.id)
-    print(request.POST)
     if 'file' in request.FILES:
         image_file = request.FILES['file']
         profile.image = image_file

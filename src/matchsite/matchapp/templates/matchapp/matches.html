@@ -255,6 +255,12 @@ body {
                display: block;
                visibility: visible;
            }
+
+           .main{
+            position: fixed; /* or absolute */
+            top: 50%;
+            left: 50%;
+           }
        }
 </style>
 
@@ -268,27 +274,32 @@ body {
     <a href="{% url 'logout' %}" name = "logout">Log out</a>
 </div>
 
+<form action = "{% url 'filter' %}" method = "POST">
+<div class = "main">
+<input type = "radio" name = "gender" value = "Male"> Male
+<input type = "radio" name = "gender" value = "Female"> Female
+<input type="number" maxlength="3" placeholder="Filter by age">
+<input type = "button" value = "Filter"> 
+</div>
+</form>
+
+
 
 {% for match in matches %}
 <div id="{{matches.profile.id}}">
+
     <div class="col-sm-5 col-xs-6 tital "><b>Username:</b></div>
-    <div class="col-sm-7 col-xs-6 " contenteditable='true' id = "username">{{ matches.username }}</div>
+    <div class="col-sm-7 col-xs-6 "  id = "username">{{ match.username }}</div>
     <div class="col-sm-5 col-xs-6 tital "><b>Email:</b></div>
-    <div class="col-sm-7" contenteditable='true' id = "email">{{ matches.profile.email }}</div>
+    <div class="col-sm-7"  id = "email">{{ match.profile.email }}</div>
     <div class="col-sm-5 col-xs-6 tital "><b>Date of Birth:</b></div>
-    <div class="col-sm-7" contenteditable='true' id = "dob"> {{ matches.profile.dob }}</div>
+    <div class="col-sm-7"  id = "dob"> {{ match.profile.dob }}</div>
     <div class="col-sm-5 col-xs-6 tital "><b>Gender:</b></div>
-    <div class="col-sm-7" contenteditable='true' id = "gender">{{ user.profile.gender }}</div>
+    <div class="col-sm-7"  id = "gender">{{ match.profile.gender }}</div>
     <div class="col-sm-5 col-xs-6 tital "><b>Hobbies:</b></div>
-    <div class="col-sm-7" contenteditable='true' id = "hobbies">{{ matches.hobbies }}</div>
+    <div class="col-sm-7"  id = "hobbies">{{ match.hobbies }}</div>
 </div>
 {% endfor %}
-
-
-
-
-
-
 
 
 

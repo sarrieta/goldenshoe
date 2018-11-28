@@ -68,14 +68,14 @@ $(document).ready(function () {
 })
 
 //Save image file via ajax request
-$(document).ready(function () {
-    formdata = new FormData();
+/*$(document).ready(function () {
     $("#profile-image-upload").on("change", function(){
         //event.preventDefault();
-
+        var formdata = new FormData();
         //get file from form
         var file = $('#profile-image-upload')[0].files[0];
-        //var image = new FormData($('#profile-image-upload')[0]);
+        formdata.append('profile-image-upload', file);
+        formdata.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
 
         //if(formdata){
             //formdata.append("image", file);
@@ -96,5 +96,32 @@ $(document).ready(function () {
     
     });
 
+});*/
+
+$(function () {
+$('#profile-image-upload').change(function uploadFile() {
+   //$('#progressBar').show();
+   var formdata = new FormData();
+   var file = $('#profile-image-upload')[0].files[0];
+   formdata.append('profile-image-upload', file);
+   formdata.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
+   $.ajax({
+      xhr: function () {
+         var xhr = new window.XMLHttpRequest();
+         xhr.upload.addEventListener('progress', progressHandler, false);
+         xhr.addEventListener('load', completeHandler, false);
+         return xhr;
+      },
+      type : 'POST',
+      url  : '/uploadimage/',
+      data : formdata,
+      success: function(data) {
+         alert("test")
+      },
+      error: alert("dont work"),
+      processData : false,
+      contentType : false,
+   });
+});
 });
 
