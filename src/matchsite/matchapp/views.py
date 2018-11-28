@@ -38,8 +38,8 @@ def index(request):
     form = UserLogInForm()
     if 'username' in request.session:
         return redirect('displayProfile')
-	
-    return render(request, 'matchapp/index.html', {'form': form})
+    else:
+        return render(request, 'matchapp/index.html', {'form': form})
     
 
 
@@ -193,8 +193,7 @@ def similarHobbies(request, user):
     # Note to self do not need the gt thing check first
     match = hobbies.filter(hob_count__gt=1).order_by('-hob_count')
 
-
-    #print(Member.objects.filter(hobbies__in=user.hobbies.all()))
+    test = Member.objects.filter(hobbies__in=user.hobbies.all()).exclude(id=user.id)
 
     context = {
         'appname': appname,
@@ -202,6 +201,7 @@ def similarHobbies(request, user):
         'loggedIn': True
         }
 
+    print("users with similar hobbies" + str(test))
     return render(request, 'matchapp/matches.html', context)
 
 # filter button on similarHobbies page which generates
