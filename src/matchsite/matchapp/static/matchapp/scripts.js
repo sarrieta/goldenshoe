@@ -68,7 +68,7 @@ $(document).ready(function () {
 })
 
 //Save image file via ajax request
-/*$(document).ready(function () {
+$(document).ready(function () {
     formdata = new FormData();
     $("#profile-image-upload").on("change", function(){
         //event.preventDefault();
@@ -97,5 +97,5 @@ $(document).ready(function () {
     
     });
 
-});*/
+});
 
