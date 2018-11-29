@@ -196,6 +196,7 @@ def similarHobbies(request, user):
     context = {
         'appname': appname,
         'matches': match,
+        'numberOfhobbies': hobbies.count(),
         'loggedIn': True
         }
 
