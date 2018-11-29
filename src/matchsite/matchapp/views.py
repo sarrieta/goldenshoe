@@ -95,16 +95,21 @@ def register(request):
             user.set_password(password)
 
             try:user.save()     
-            except IntegrityError: raise Http404('Username '+ str(user)+' already taken: Username must be unique')
+            except: #IntegrityError: 
+                #raise Http404('Username '+ str(user)+' already taken: Username must be unique')
 
 			#return redirect('index')
-            context = {
-                 'appname':appname,
-                 'form': form,
-                 'error':'Username '+ str(user) +' already taken: Usernames must be unique',
-                 }
+                context = {
+                    'appname':appname,
+                    'form': form,
+                    'error':'Username '+ str(user) +' already taken: Usernames must be unique',
+                    }
             # login(request,user)
-            return render(request, 'matchapp/register.html', context)
+                return render(request, 'matchapp/register.html', context)
+
+            form = UserLogInForm()
+
+            return render(request, 'matchapp/index.html', {'form': form})
 
 
      else:
