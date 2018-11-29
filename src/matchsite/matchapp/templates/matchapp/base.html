@@ -33,7 +33,6 @@
 
 
     }
-
     div.error_message {
 
         text-align: center;
@@ -134,15 +133,15 @@
 
 <body>
 
+    {% if loggedIn %}
     <div id="mySidenav" class="sidenav">
         <!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
         <br><br><br><br><br><br>
-
-
         <a class="profile" href="{% url 'displayProfile' %}" name="displayProfile">Profile</a>
         <a href="{% url 'similarHobbies' %}">Matches</a>
         <a href="{% url 'logout' %}">Log out</a>
     </div>
+    {% endif%}
 
 
 

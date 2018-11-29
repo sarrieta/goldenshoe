@@ -36,10 +36,10 @@ appname = 'matchapp'
 def index(request):
 	# Render the index page
     form = UserLogInForm()
-    if 'username' in request.session:
-        return redirect('displayProfile')
-    else:
-        return render(request, 'matchapp/index.html', {'form': form})
+    """if 'username' in request.session:
+        return redirect('displayProfile')"""
+    """else:"""
+    return render(request, 'matchapp/index.html', {'form': form})
     
 
 
