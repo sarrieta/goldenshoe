@@ -35,8 +35,13 @@ appname = 'matchapp'
 
 def index(request):
 	# Render the index page
-	form = UserLogInForm()
-	return render(request, 'matchapp/index.html', {'form': form})
+    form = UserLogInForm()
+    """if 'username' in request.session:
+        return redirect('displayProfile')"""
+    """else:"""
+    return render(request, 'matchapp/index.html', {'form': form})
+    
+
 
 # user logged in
 
@@ -89,18 +94,18 @@ def register(request):
             user = Member(username=username)
             user.set_password(password)
 
-            try: user.save()
-            except IntegrityError: #raise Http404('Username '+ str(user)+' already taken: Username must be unique')
+            try:user.save()     
+            except IntegrityError: raise Http404('Username '+ str(user)+' already taken: Username must be unique')
 
 			#return redirect('index')
-
-             context = {
+            context = {
                  'appname':appname,
                  'form': form,
                  'error':'Username '+ str(user) +' already taken: Usernames must be unique',
                  }
             # login(request,user)
             return render(request, 'matchapp/register.html', context)
+
 
      else:
         form = UserRegForm()
@@ -186,13 +191,16 @@ def similarHobbies(request, user):
     hobbies = common.annotate(hob_count=Count('hobbies'))
     # Process the matches in decending
     # Note to self do not need the gt thing check first
-    match = hobbies.filter(hob_count__gt=1).order_by('-hob_count')
+    match = hobbies.order_by('-hob_count')
 
     context = {
         'appname': appname,
         'matches': match,
         'loggedIn': True
         }
+
+    #print(str(match.profile))
+    print("users with similar hobbies" + str(match))
     return render(request, 'matchapp/matches.html', context)
 
 # filter button on similarHobbies page which generates
@@ -205,7 +213,6 @@ def filter(request, user):
 @loggedin
 def displayProfile(request, user):
 	# query users login
-
     if request.method == "GET":
         form = UserProfile()
         person = Member.objects.get(id=user.id)
@@ -247,13 +254,13 @@ def editProfile(request, user):
         profile = Profile.objects.get(user=member.id)
 
         data = QueryDict(request.body)
-
-        #debugging to see if there's anything in request.files but is empty
         
-
         profile.gender = data['gender']
         profile.email = data['email']
         profile.dob = data['dob']
+       
+        # Need to make sure to save the hobbies
+        # to the user
 
         profile.save()
 
@@ -265,22 +272,6 @@ def editProfile(request, user):
         }
         return JsonResponse(response)
 
-
-
-
-        hobbies = data['hobbies']
-        hobbies = hobbies.split(" ")
-
-
-        #if hobbies not ''
-        #   for hobby in hobbies:
-        #       member.hobbies.add(Hobby.objects.get(hobby=hobby))
-        #       member.save()
-
-
-
-        #return JsonResponse(response)
-
     else:
         raise Http404("PUT request was not used")
 
@@ -289,12 +280,11 @@ def editProfile(request, user):
 def upload_image(request, user):
     member = Member.objects.get(id=user.id)
     profile = Profile.objects.get(user = member.id)
-    if 'file' in request.FILES:
-        image_file = request.FILES['file']
+    if 'img_file' in request.FILES:
+        image_file = request.FILES['img_file']
         profile.image = image_file
-        print(user.profile.image.url)
-        #profile.save()
-        return HttpResponse(user.profile.image.url)
+        profile.save()
+        return HttpResponse(profile.image.url)
     else:
         return HttpResponse("test")
     

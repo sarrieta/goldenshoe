@@ -8,12 +8,6 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
-$(function () {
-    $('#profile-image1').on('click', function () {
-        $('#profile-image-upload').click();
-    });
-});
-
 ///password regesxvalidation ends
 
 //when user logs in the profile page displays
@@ -66,62 +60,6 @@ $(document).ready(function () {
     });
 
 })
-
-//Save image file via ajax request
-/*$(document).ready(function () {
-    $("#profile-image-upload").on("change", function(){
-        //event.preventDefault();
-        var formdata = new FormData();
-        //get file from form
-        var file = $('#profile-image-upload')[0].files[0];
-        formdata.append('profile-image-upload', file);
-        formdata.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
-
-        //if(formdata){
-            //formdata.append("image", file);
-            $.ajax({
-                url: "/uploadimage/",
-                type: "POST",
-                data: file,
-                // Tell jQuery not to process data or worry about content-type
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function (data) {
-                    console.log(data)
-                },
-                error: console.log(file)
-            })
-
-    
-    });
-
-});*/
-
-$(function () {
-$('#profile-image-upload').change(function uploadFile() {
-   //$('#progressBar').show();
-   var formdata = new FormData();
-   var file = $('#profile-image-upload')[0].files[0];
-   formdata.append('profile-image-upload', file);
-   formdata.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
-   $.ajax({
-      xhr: function () {
-         var xhr = new window.XMLHttpRequest();
-         xhr.upload.addEventListener('progress', progressHandler, false);
-         xhr.addEventListener('load', completeHandler, false);
-         return xhr;
-      },
-      type : 'POST',
-      url  : '/uploadimage/',
-      data : formdata,
-      success: function(data) {
-         alert("test")
-      },
-      error: alert("dont work"),
-      processData : false,
-      contentType : false,
-   });
+$('#profile-image-upload').click(function () {
+    $("#img_file").click();
 });
-});
-

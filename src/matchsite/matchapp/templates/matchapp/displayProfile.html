@@ -8,7 +8,7 @@
     <br><br><br><br><br><br>
 
 
-    <a class = "profile" href="{% url 'displayProfile' %}" name = "displayProfile">Profile</a>
+    <a class="profile" href="{% url 'displayProfile' %}" name="displayProfile">Profile</a>
     <a href="{% url 'similarHobbies' %}">Matches</a>
     <a href="{% url 'logout' %}">Log out</a>
 </div>
@@ -29,17 +29,26 @@
 
                             <div class="box-body">
                                 <div class="col-sm-6">
-                                    <div align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"
-                                            id="profile-image1" class="img-circle img-responsive">
-                                        <form id='upload_form' method='POST' action="{% url 'displayProfile' %}" enctype='multipart/form-data'>
-                                        <input id="profile-image-upload" class="hidden" type="file" name="file">
+
+
+
+                                    <div align="center">
+                                        <img alt="User Pic" src="{{user.profile.image.url}}" id="profile-image" class="img-circle img-responsive">
+                                        <input id="profile-image-upload" class="hidden">
+                                        <progress id="progressBar" value="0" max="100" style="width:150px;display:none;">
+                                        </progress>
+
                                         <div style="color:#999;">click here to change profile image</div>
-                                    </form>
+                                        </form>
                                         <!--Upload Image Js And Css-->
                                     </div>
 
+                                    <form id='upload_form' method='POST' action="{% url 'displayProfile' %}" enctype='multipart/form-data'>
+                                        {% csrf_token %}
+                                        <input type="file" id="img_file" style="display:none;">
+                                    </form>
                                     <br>
-                                    {% csrf_token %}
+
                                     <!-- /input-group -->
                                 </div>
                                 <div class="col-sm-6">
@@ -52,25 +61,24 @@
                                 <hr style="margin:5px 0 5px 0;">
 
 
-
                                 <div id="{{user.profile.id}}">
                                     <div class="col-sm-5 col-xs-6 tital "><b>Username:</b></div>
-                                    <div class="col-sm-7 col-xs-6 " contenteditable='true' id = "username">{{ user.username }}</div>
+                                    <div class="col-sm-7 col-xs-6 " contenteditable='true' id="username">{{user.username}}</div>
                                     <div class="col-sm-5 col-xs-6 tital "><b>Email:</b></div>
-                                    <div class="col-sm-7" contenteditable='true' id = "email">{{ user.profile.email }}</div>
+                                    <div class="col-sm-7" contenteditable='true' id="email">{{ user.profile.email }}</div>
                                     <div class="col-sm-5 col-xs-6 tital "><b>Date of Birth:</b></div>
-                                    <div class="col-sm-7" contenteditable='true' id = "dob"> {{ user.profile.dob }}</div>
+                                    <div class="col-sm-7" contenteditable='true' id="dob"> {{ user.profile.dob }}</div>
                                     <div class="col-sm-5 col-xs-6 tital "><b>Gender:</b></div>
-                                    <div class="col-sm-7" contenteditable='true' id = "gender">{{ user.profile.gender }}</div>
+                                    <div class="col-sm-7" contenteditable='true' id="gender">{{ user.profile.gender }}</div>
                                     <div class="col-sm-5 col-xs-6 tital "><b>Hobbies:</b></div>
-                                    <div class="col-sm-7" contenteditable='true' id = "hobbies">#</div>
+                                    <div class="col-sm-7" contenteditable='true' id="hobbies">#</div>
                                 </div>
 
 
                                 <br><br>
 
+
                                 <div class=updateBtn id=update_button><input type="submit" value="Save"></div>
-                        </form>
 
                                 <!-- /.box-body -->
                             </div>
