@@ -6,41 +6,31 @@
 
 </style>
 
-<div id="mySidenav" class="sidenav">
-    <!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
-    <br><br><br><br><br><br>
-
-
-    <a class = "profile" href="{% url 'displayProfile' %}" name = "displayProfile">Profile</a>
-    <a href="{% url 'similarHobbies' %}" name = "similarHobbies" >Matches</a>
-    <a href="{% url 'logout' %}" name = "logout">Log out</a>
-</div>
-
 
 <div class="filter_form">
 
-    <form action = "{% url 'filter' %}" method = "POST">
-    <div class = "main">
-    <input type = "radio" name = "gender" value = "Male">Male
-    <input type = "radio" name = "gender" value = "Female"> Female
-    <input type="number" maxlength="3" placeholder="Filter by age">
-    <input type = "button" value = "Filter">
-    </div>
+    <form action="{% url 'filter' %}" method="POST">
+        <div class="main">
+            <input type="radio" name="gender" value="Male">Male
+            <input type="radio" name="gender" value="Female"> Female
+            <input type="number" maxlength="3" placeholder="Filter by age">
+            <input type="button" value="Filter">
+        </div>
     </form>
-  </div>
+</div>
 
 
 <div class="filter">
     <div><b>Username:</b></div>
-    <div id = "username">{{ match.username }}</div>
-    <div ><b>Email:</b></div>
-    <div id = "email">{{ match.profile.email }}</div>
-    <div ><b>Date of Birth:</b></div>
-    <div   id = "dob"> {{ match.profile.dob }}</div>
-    <div ><b>Gender:</b></div>
-    <div   id = "gender">{{ match.profile.gender }}</div>
-    <div ><b>Hobbies:</b></div>
-    <div  id = "hobbies">{{ match.hobbies }}</div>
+    <div id="username">{{ match.username }}</div>
+    <div><b>Email:</b></div>
+    <div id="email">{{ match.profile.email }}</div>
+    <div><b>Date of Birth:</b></div>
+    <div id="dob"> {{ match.profile.dob }}</div>
+    <div><b>Gender:</b></div>
+    <div id="gender">{{ match.profile.gender }}</div>
+    <div><b>Hobbies:</b></div>
+    <div id="hobbies">{{ match.hobbies }}</div>
 </div>
 
 
