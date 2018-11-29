@@ -3,7 +3,7 @@
 {% block content %}
 
 <style>
-body {
+    body {
            font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
            color: #989898;
            margin: 10px;
@@ -269,48 +269,48 @@ body {
     <br><br><br><br><br><br>
 
 
-    <a class = "profile" href="{% url 'displayProfile' %}" name = "displayProfile">Profile</a>
-    <a href="{% url 'similarHobbies' %}" name = "similarHobbies" >Matches</a>
-    <a href="{% url 'logout' %}" name = "logout">Log out</a>
+    <a class="profile" href="{% url 'displayProfile' %}" name="displayProfile">Profile</a>
+    <a href="{% url 'similarHobbies' %}" name="similarHobbies">Matches</a>
+    <a href="{% url 'logout' %}" name="logout">Log out</a>
 </div>
 
-<form action = "{% url 'filter' %}" method = "POST">
-<div class = "main">
-<input type = "radio" name = "gender" value = "Male">Male
-<input type = "radio" name = "gender" value = "Female"> Female
-<input type="number" maxlength="3" placeholder="Filter by age">
-<input type = "button" value = "Filter"> 
-</div>
+<form action="{% url 'filter' %}" method="POST">
+    <div class="main">
+        <input type="radio" name="gender" value="Male">Male
+        <input type="radio" name="gender" value="Female"> Female
+        <input type="number" maxlength="3" placeholder="Filter by age">
+        <input type="button" value="Filter">
+    </div>
 </form>
 
 
 
 {% for match in matches %}
-<div id="{{matches.profile.id}}">
-    <div ><b>Username:</b></div>
-    <div>{{ matches.username }}</div>
+<div id="{{match.profile.id}}">
+    <div><b>Username:</b></div>
+    <div>{{ match.username }}</div>
     <div><b>Email:</b></div>
-    <div> matches.profile.email }}</div>
+    <div> {{match.profile.email }}</div>
     <div><b>Date of Birth:</b></div>
-    <div> {{ matches.profile.dob }}</div>
+    <div> {{ match.profile.dob }}</div>
     <div>><b>Gender:</b></div>
-    <div>{{ user.profile.gender }}</div>
+    <div>{{ match.profile.gender }}</div>
     <div><b>Hobbies:</b></div>
-    <div>{{ matches.hobbies }}</div>
+    <div>""</div>
 </div>
 {% endfor %}
 
 
-    <div class="col-sm-5 col-xs-6 tital "><b>Username:</b></div>
-    <div class="col-sm-7 col-xs-6 "  id = "username">{{ match.username }}</div>
-    <div class="col-sm-5 col-xs-6 tital "><b>Email:</b></div>
-    <div class="col-sm-7"  id = "email">{{ match.profile.email }}</div>
-    <div class="col-sm-5 col-xs-6 tital "><b>Date of Birth:</b></div>
-    <div class="col-sm-7"  id = "dob"> {{ match.profile.dob }}</div>
-    <div class="col-sm-5 col-xs-6 tital "><b>Gender:</b></div>
-    <div class="col-sm-7"  id = "gender">{{ match.profile.gender }}</div>
-    <div class="col-sm-5 col-xs-6 tital "><b>Hobbies:</b></div>
-    <div class="col-sm-7"  id = "hobbies">{{ match.hobbies }}</div>
+<div class="col-sm-5 col-xs-6 tital "><b>Username:</b></div>
+<div class="col-sm-7 col-xs-6 " id="username">{{ match.username }}</div>
+<div class="col-sm-5 col-xs-6 tital "><b>Email:</b></div>
+<div class="col-sm-7" id="email">{{ match.profile.email }}</div>
+<div class="col-sm-5 col-xs-6 tital "><b>Date of Birth:</b></div>
+<div class="col-sm-7" id="dob"> {{ match.profile.dob }}</div>
+<div class="col-sm-5 col-xs-6 tital "><b>Gender:</b></div>
+<div class="col-sm-7" id="gender">{{ match.profile.gender }}</div>
+<div class="col-sm-5 col-xs-6 tital "><b>Hobbies:</b></div>
+<div class="col-sm-7" id="hobbies">{{ match.hobbies }}</div>
 </div>
 
 {% endblock %}
