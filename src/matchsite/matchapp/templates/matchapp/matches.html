@@ -3,7 +3,7 @@
 {% block content %}
 
 <style>
-.title,.subtitle{
+    .title,.subtitle{
 	text-align: center
 }
 
@@ -25,48 +25,49 @@
 </style>
 
 
-<h3 class = "title"> Matches <h3>
-<h4 class = "subtitle"> You have {{numberOfhobbies}} match(es) </h4> 
+<h3 class="title"> Matches <h3>
+        <h4 class="subtitle"> You have {{numberOfhobbies}} match(es) </h4>
 
 
-<div class="filter_form">
-    <form action="{% url 'filter' %}" method="POST">
-        <div class="main">
-        	<br>
-        	<br>
-            &nbsp; &nbsp; &nbsp;<input type="radio" name="gender" value="Male">Male
-            <input type="radio" name="gender" value="Female"> Female 
-            <input type="number" placeholder="Filter by age">
+        <div class="filter_form">
+            <form action="{% url 'filter' %}" method="POST">
+                <div class="main">
+                    <br>
+                    <br>
+                    &nbsp; &nbsp; &nbsp;<input type="radio" name="gender" value="Male">Male
+                    <input type="radio" name="gender" value="Female"> Female
+                    <input type="number" placeholder="Filter by age">
+                </div>
+            </form>
         </div>
-    </form>
-</div>
 
 
-{%for match in matches%}
+        {%for match in matches%}
 
-<div class = "container">
-	
-<div class="card-groups">
-	<div class = "card">
+        <div class="container">
 
-		<img class = "card-img-top" src="{{match.profile.image.url}}" alt="Card image cap">
-		<div class="card-body">
-	    <h5 class = "card-title"> {{ match.username }}</h5></div>
-	    <p class ="card-text"> 
-	    <div><b>Email:</b> {{ match.profile.email }}</div>
-	    <div><b>Date of Birth:</b> {{ match.profile.dob }}</div>
-	    <div><b>Gender:</b>{{ match.profile.gender }}</div>
-	    <div><b>Hobbies:</b> {{ match.hobbies }}</div>
-	    </p>
-    </div>
-</div>
-</div>
+            <div class="card-groups">
+                <div class="card">
 
-  
-{%endfor%}
+                    <img class="card-img-top" src="{{match.profile.image.url}}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"> {{ match.username }}</h5>
+                    </div>
+                    <p class="card-text">
+                        <div><b>Email:</b> {{ match.profile.email }}</div>
+                        <div><b>Age:</b> {{ match.profile.age }}</div>
+                        <div><b>Gender:</b> {{ match.profile.gender }}</div>
+                        <div><b>Hobbies:</b> {{ match.hobbies }}</div>
+                    </p>
+                </div>
+            </div>
+        </div>
 
 
+        {%endfor%}
 
 
 
-{% endblock %}
+
+
+        {% endblock %}
