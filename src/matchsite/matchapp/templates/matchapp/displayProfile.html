@@ -52,7 +52,7 @@
               <hr style="margin:5px 0 5px 0;">
 
               <form>
-                <div id="username"/><b>Username :</b> <input contenteditable='true' size="25" id="username" value={{user.username}}>
+                <div id="username"/><b>Username :</b> {{user.username}}
 
                 <div id="email"/><b>E-mail : </b> <input contenteditable='true' size="29"
                 type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
@@ -60,7 +60,7 @@
                 <!-- <input contenteditable='true'
                 type="date" id="username" value={{user.profile.dob}}>-->
                 <div id="dob"/><b>Date of Birth : </b>
-                <input type="text" readonly id="from-datepicker" value={{user.profile.gender}}></input>
+                <input type="text" readonly id="from-datepicker" size="23" value={{user.profile.gender}}></input>
 
 
                 <!--<input contenteditable='true' size="28"  id="username" value={{user.profile.gender}} > -->
@@ -72,16 +72,15 @@
                 <label for="female">Female</label>
               </div>
 
-              <div id="hobbies"/><b>Hobbies : </b> <div class="subject-info-box-1">
+              <b>Hobbies : </b>
+
+              <div id="hobbies"/><div class="subject-info-box-1">
                 <select multiple="multiple" id='lstBox1' class="form-control">
                   <option value="ajax">Ajax</option>
                   <option value="jquery">jQuery</option>
-                  <option value="javascript">JavaScript</option>
-                  <option value="mootool">MooTools</option>
-                  <option value="prototype">Prototype</option>
-                  <option value="dojo">Dojo</option>
                 </select>
               </div>
+
               <div class="subject-info-arrows text-center">
                 <input type="button" id="btnAllRight" value=">>" class="btn btn-default" /><br />
                 <input type="button" id="btnRight" value=">" class="btn btn-default" /><br />
@@ -92,10 +91,6 @@
                 <select multiple="multiple" id='lstBox2' class="form-control">
                   <option value="asp">ASP.NET</option>
                   <option value="c#">C#</option>
-                  <option value="vb">VB.NET</option>
-                  <option value="java">Java</option>
-                  <option value="php">PHP</option>
-                  <option value="python">Python</option>
                 </select>
               </div>
               <div class="clearfix"></div>

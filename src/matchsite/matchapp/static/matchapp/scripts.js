@@ -59,6 +59,7 @@ $('#profile-image-upload').click(function () {
 $( document ).ready(function() {
   $("#from-datepicker").datepicker({
     format: 'yyyy-mm-dd'
+
   });
   $("#from-datepicker").on("change", function () {
     var fromdate = $(this).val();
