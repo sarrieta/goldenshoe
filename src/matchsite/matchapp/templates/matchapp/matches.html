@@ -36,7 +36,12 @@
         	<br>
             &nbsp; &nbsp; &nbsp;<input type="radio" name="gender" value="Male">Male
             <input type="radio" name="gender" value="Female"> Female 
-            <input type="text" placeholder="Filter by age" onkeypress="return isNumberKey(event)">
+            <div id="slider-range"></div>
+            <label for="age">Filter by age:</label>
+            <input type="text" id="age" readonly style="border:0; color:#f6931f; font-weight:bold;">
+         
+             
+            
         </div>
     </form>
 </div>

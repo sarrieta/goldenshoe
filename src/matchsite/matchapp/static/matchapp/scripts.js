@@ -56,7 +56,6 @@ $('#profile-image-upload').click(function () {
     $("#img_file").click();
 });
 /////datepicket displayProfile
-<script>
 $( document ).ready(function() {
   $("#from-datepicker").datepicker({
     format: 'yyyy-mm-dd'
@@ -66,6 +65,19 @@ $( document ).ready(function() {
     alert(fromdate);
   });
 });
-</script>
+
+$( function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 18,
+      max: 50,
+      values: [ 16, 25 ],
+      slide: function( event, ui ) {
+        $( "#age" ).val( + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+      }
+    });
+    $( "#age" ).val( "" + $( "#slider-range" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range" ).slider( "values", 1 ) );
+  } );
 
 ////datepicker displayProfile
