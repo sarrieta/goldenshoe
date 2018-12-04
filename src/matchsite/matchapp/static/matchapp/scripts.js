@@ -67,60 +67,35 @@ $( document ).ready(function() {
   });
 });
 
-$( function() {
-    $( "#slider-range" ).slider({
-      range: true,
-      min: 18,
-      max: 50,
-      values: [ 16, 25 ],
-      slide: function( event, ui ) {
-        $( "#age" ).val( + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+
+      $(function () {
+          $("#slider-range").slider({
+              range: true,
+              min: 16,
+              max: 50,
+              values: [21, 30],
+              slide: function (event, ui) {
+                  console.log($("#age").val());
+                  var ageValue = getSecondPart($("#age").val());
+                  if (ui.values[1] == '50') {
+                      if (ageValue == ' 49' || ageValue == ' 50+') {
+                          $("#age").val(ui.values[0] + " - " + "50+");
+                      }
+                  }
+                  else {
+                      $("#age").val(ui.values[0] + " - " + ui.values[1]);
+                  }
+              }
+          });
+
+          $("#age").val($("#slider-range").slider("values", 0) +
+            " - " + $("#slider-range").slider("values", 1));
+      });
+      
+      function getSecondPart(str) {
+          return str.split('-')[1];
       }
-    });
-    $( "#age" ).val( "" + $( "#slider-range" ).slider( "values", 0 ) +
-      " - " + $( "#slider-range" ).slider( "values", 1 ) );
-  } );
+
+
 
 ////datepicker displayProfile
-$(function () {
-    $('#btnRight').click(function (e) {
-        var selectedOpts = $('#lstBox1 option:selected');
-        if (selectedOpts.length == 0) {
-            alert("Nothing to move.");
-            e.preventDefault();
-        }
-        $('#lstBox2').append($(selectedOpts).clone());
-        $(selectedOpts).remove();
-        e.preventDefault();
-    });
-    $('#btnAllRight').click(function (e) {
-        var selectedOpts = $('#lstBox1 option');
-        if (selectedOpts.length == 0) {
-            alert("Nothing to move.");
-            e.preventDefault();
-        }
-        $('#lstBox2').append($(selectedOpts).clone());
-        $(selectedOpts).remove();
-        e.preventDefault();
-    });
-    $('#btnLeft').click(function (e) {
-        var selectedOpts = $('#lstBox2 option:selected');
-        if (selectedOpts.length == 0) {
-            alert("Nothing to move.");
-            e.preventDefault();
-        }
-        $('#lstBox1').append($(selectedOpts).clone());
-        $(selectedOpts).remove();
-        e.preventDefault();
-    });
-    $('#btnAllLeft').click(function (e) {
-        var selectedOpts = $('#lstBox2 option');
-        if (selectedOpts.length == 0) {
-            alert("Nothing to move.");
-            e.preventDefault();
-        }
-        $('#lstBox1').append($(selectedOpts).clone());
-        $(selectedOpts).remove();
-        e.preventDefault();
-    });
-});

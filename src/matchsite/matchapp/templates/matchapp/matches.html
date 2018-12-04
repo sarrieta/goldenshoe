@@ -3,7 +3,12 @@
 {% block content %}
 
 <style>
-    .title,.subtitle{
+
+.main{
+    margin-left: 570px;
+}
+
+.title,.subtitle{
 	text-align: center
 }
 
@@ -17,13 +22,23 @@
 .card-title{
 	text-align: center
 }
-.card-groups{
-    text-align: center
-}
 
 .card{
 	 width:300px;
+}
 
+
+#slider-range {
+    margin: 10px;
+}
+.ui-slider-horizontal {
+    height: 8px;
+    width: 200px;
+}
+.ui-slider .ui-slider-handle {
+    height: 15px;
+    width: 5px;
+    padding-left: 5px;
 }
 
 </style>
@@ -43,7 +58,6 @@
             <div id="slider-range"></div>
             <label for="age">Filter by age:</label>
             <input type="text" id="age" readonly style="border:0; color:#f6931f; font-weight:bold;">
-         
              
             
         </div>
@@ -59,6 +73,7 @@
 
                     <div class="card-groups">
                         <div class="card">
+
 
                             <img class="card-img-top" src="{{match.profile.image.url}}" alt="Card image cap">
                             <div class="card-body">
