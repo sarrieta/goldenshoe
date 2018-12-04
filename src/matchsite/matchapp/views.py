@@ -67,12 +67,6 @@ def tc(request):
 	return render(request, 'matchapp/tc.html')
 
 
-# should render the signup page
-"""def signup(request):
-	# form = UserRegForm()
-	# return render(request,'matchapp/register.html', {'form': form})
-	return HttpResponse("test")"""
-
 # once user clicks register button
 # should render user registered page if unique user is entered
 # need validation for email, user, dob, profile image
@@ -236,7 +230,7 @@ def filter(request, user):
             raise Http404("Please fill in the boxes")
 
         print(str(match))
-        return HttpResponse(display_matches(match, user.username))
+        return HttpResponse(display_matches(match))
     else:            
 	    raise Http404("POST request was not used")
 
