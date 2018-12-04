@@ -8,21 +8,6 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
-///password regesxvalidation ends
-
-//when user logs in the profile page displays
-/*$(document).ready(function () {
-
-    $(".profile").click(function (event) {
-        event.preventDefault();
-        $.ajax({
-            type: "GET",
-            url: "/displayProfile",
-        })
-
-    });
-
-})*/
 
 function isNumberKey(evt){
     var charCode = (evt.which) ? evt.which : event.keyCode
