@@ -55,7 +55,7 @@ class Profile(models.Model):
 
     @property
     def age(self):
-        return int((datetime.now().date() - self.dob).days / 365.25)
+        return int((datetime.now().year - self.dob.year))
 
     def __str__(self):
         return self.user.username
