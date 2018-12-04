@@ -55,3 +55,17 @@ $(document).ready(function () {
 $('#profile-image-upload').click(function () {
     $("#img_file").click();
 });
+/////datepicket displayProfile
+<script>
+$( document ).ready(function() {
+  $("#from-datepicker").datepicker({
+    format: 'yyyy-mm-dd'
+  });
+  $("#from-datepicker").on("change", function () {
+    var fromdate = $(this).val();
+    alert(fromdate);
+  });
+});
+</script>
+
+////datepicker displayProfile
