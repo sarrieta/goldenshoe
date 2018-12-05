@@ -60,9 +60,14 @@
                 <!-- <input contenteditable='true'
                 type="date" id="username" value={{user.profile.dob}}>-->
                 <div id="dob"/><b>Date of Birth : </b>
-                <input type="text" readonly id="from-datepicker" size="23" value={{user.profile.gender}}></input>
+                <input type="text" id="from-datepicker"/>
 
-
+                <div class="input-group date" data-provide="datepicker">
+                      <input type="text" class="form-control" data-date-format="yyyy/mm/dd">
+                      <div class="input-group-addon">
+                          <span class="glyphicon glyphicon-th"></span>
+                      </div>
+                  </div>
                 <!--<input contenteditable='true' size="28"  id="username" value={{user.profile.gender}} > -->
                 <div id="gender"/><b>Gender : </b>
                 <input type="radio" id="male" name="gender" value="M"
@@ -107,7 +112,6 @@
           </form>
 
           <br><br>
-
 
 
 
