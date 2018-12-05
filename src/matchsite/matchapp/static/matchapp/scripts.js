@@ -61,9 +61,9 @@ $('#profile-image-upload').click(function () {
               range: true,
               min: 16,
               max: 50,
-              values: [21, 30],
+              values: [16, 50],
+
               slide: function (event, ui) {
-                  console.log($("#age").val());
                   var ageValue = getSecondPart($("#age").val());
                   if (ui.values[1] == '50') {
                       if (ageValue == ' 49' || ageValue == ' 50+') {
@@ -74,12 +74,14 @@ $('#profile-image-upload').click(function () {
                       $("#age").val(ui.values[0] + " - " + ui.values[1]);
                   }
               }
+
+             
           });
 
           $("#age").val($("#slider-range").slider("values", 0) +
-            " - " + $("#slider-range").slider("values", 1));
+            " - " + $("#slider-range").slider("values", 1) + "+ ");
       });
-
+      
       function getSecondPart(str) {
           return str.split('-')[1];
       }
