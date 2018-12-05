@@ -96,3 +96,9 @@ $('#profile-image-upload').click(function () {
               alert(fromdate);
           });
       });
+
+$('#update_button').click(function (event) {
+  event.preventDefault();
+  alert("test");
+});
+
