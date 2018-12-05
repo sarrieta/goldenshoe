@@ -79,7 +79,7 @@ $('#profile-image-upload').click(function () {
           $("#age").val($("#slider-range").slider("values", 0) +
             " - " + $("#slider-range").slider("values", 1));
       });
-
+      
       function getSecondPart(str) {
           return str.split('-')[1];
       }
