@@ -56,7 +56,7 @@ $('#profile-image-upload').click(function () {
     $("#img_file").click();
 });
 
-      $(function () {
+      $(function sliderRange() {
           $("#slider-range").slider({
               range: true,
               min: 16,
@@ -97,8 +97,19 @@ $('#profile-image-upload').click(function () {
           });
       });
 
-$('#update_button').click(function (event) {
+
+$(document ).ready(function() {
+  $('#save_button').click(function (event) {
   event.preventDefault();
-  alert("test");
+  $('input[name=gender]').attr('checked',false);
+  
+  var $slider = $("#slider-range");
+  $slider.slider("values", 0, 16);
+  $slider.slider("values", 1, 50);
+   $("#age").val($("#slider-range").slider("values", 0) + " - " + $("#slider-range").slider("values", 1) + "+ ");
 });
+});
+
+
+
 
