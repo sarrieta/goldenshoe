@@ -55,18 +55,6 @@ $(document).ready(function () {
 $('#profile-image-upload').click(function () {
     $("#img_file").click();
 });
-/////datepicket displayProfile
-$( document ).ready(function() {
-  $("#from-datepicker").datepicker({
-    format: 'yyyy-mm-dd'
-
-  });
-  $("#from-datepicker").on("change", function () {
-    var fromdate = $(this).val();
-    alert(fromdate);
-  });
-});
-
 
       $(function () {
           $("#slider-range").slider({
@@ -91,11 +79,18 @@ $( document ).ready(function() {
           $("#age").val($("#slider-range").slider("values", 0) +
             " - " + $("#slider-range").slider("values", 1));
       });
-      
+
       function getSecondPart(str) {
           return str.split('-')[1];
       }
 
 
-
-////datepicker displayProfile
+      $(document ).ready(function() {
+          $("#from-datepicker").datepicker({
+              format: 'yyyy-mm-dd'
+          });
+          $("#from-datepicker").on("change", function () {
+              var fromdate = $(this).val();
+              alert(fromdate);
+          });
+      });
