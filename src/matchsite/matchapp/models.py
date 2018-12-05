@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from datetime import date
+from datetime import datetime
 
 # The Hobby models provides an intermediate model for
 # the 'hobbies' ManyToMany relationship between Members
@@ -55,11 +55,11 @@ class Profile(models.Model):
 
     @property
     def age(self):
-        return int((date.now().year - self.dob.year))
+        return int((datetime.now().year - self.dob.year))
 
     @property
     def getYearBorn(self, age):
-        return int((date.now().year - int(age)))
+        return int((datetime.now().year - int(age)))
 
     def __str__(self):
         return self.user.username
