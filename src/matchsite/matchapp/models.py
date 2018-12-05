@@ -55,7 +55,10 @@ class Profile(models.Model):
 
     @property
     def age(self):
-        return int((datetime.now().year - self.dob.year))
+        if self.dob is not None:
+            return int((datetime.now().year - self.dob.year))
+        else:
+            return "DOB not specified"
 
     @property
     def getYearBorn(self, age):
