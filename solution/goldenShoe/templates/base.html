@@ -1,0 +1,196 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+
+    <title> Golden Shoe</title>
+
+<!--
+<link rel="stylesheet" href="{% static 'css/media-query.css'%}">
+
+  <link href="css/reset.css" rel="stylesheet"/>
+-->
+    <link rel="stylesheet" href="{% static 'css/reset.css'%}">
+    <link rel="stylesheet" href="{% static 'css/jquery.bxslider.css'%}">
+    <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/fontello/css/fontello.css'%}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'css/media-query.css'%}">
+
+
+    <!-- Modal card imports-->
+
+        <script src='{% static 'js/jquery.min.js'%}'></script>
+        <script src='{% static 'js/jquery.easing.min.js'%}'></script>
+        <script src='{% static 'js/jquery.bxslider.js'%}'></script>
+        <script src='{% static 'js/jquery.nicescroll.min.js'%}'></script>
+
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Products template imports start-->
+  <link rel="stylesheet" href="{% static 'products/shopping.css'%}">
+  <script src="{% static 'products/shopping.js'%}" type="text/javascript" ></script>
+    <!-- Filter top nav bar-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- products template import end-->
+
+    <!-- tracking template imports start-->
+
+
+
+    <!-- tracking template import end-->
+
+
+</head>
+
+<body>
+
+
+<div class="body-inner-wrapper">
+<!-- Navbar
+================================================== -->
+<div id="menu-wrapper" class="navbar-wrapper">
+    <div class="inner-container">
+        <div id="navigation-bar" class="navbar navbar-inverse navbar-static-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <div>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                    </div>
+                </div>
+                <div id="menu" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="home"><a href="{% url 'index' %}">Home</a></li>
+                        <li class="products"><a href="{% url 'men' %}">Men</a></li>
+                        <li class="blog"><a href="{% url 'women' %}">Women</a></li>
+                      <!--  <li class="about"><a href="{% url 'about_us' %}">Who are we</a></li>-->
+                        <li class="portfolio"><a href="{% url 'tracking' %}">Order Tracking</a></li>
+                        <li class="contact"><a href="{% url 'contact_us' %}">Live Chat</a></li>
+                        <li class="contact"><a href="{% url 'FAQ' %}">FAQ</a></li>
+                        <!--<li class="products"><a href="{% url 'get_cart' %}"><img class="img-fluid" style="width:10%;height:10%;" src='{% static 'images/shop.jpg'%}'></a></li>-->
+                        <li class="products"><a href="{% url 'get_cart' %}">Cart</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+{% block content %}
+
+
+{% endblock %}
+
+<!-- Bottom
+================================================== -->
+
+<hr>
+<div id="">
+    <div id="contactusform">
+        <div class="inner-wrapper" style="background-color:lightgray;">
+            <div class="row">
+
+                <div class="container" style="background-color:lightgray;">
+
+                  <div class="container" style="background-color:lightgray;" >
+
+                    <h3 class="text-center">Contact us</h3><br />
+
+
+                    <div class="row">
+                      <div class="col-md-8">
+                          <form action="/post" method="post">
+                            <input class="form-control" name="name" placeholder="Name..." /><br />
+                            <input class="form-control" name="phone" placeholder="Phone..." /><br />
+                            <input class="form-control" name="email" placeholder="E-mail..." /><br />
+                            <textarea class="form-control" name="text" placeholder="How can we help you?" style="height:150px;"></textarea><br />
+                            <input class="btn btn-primary" type="submit" value="Send" />
+                            <hr>
+                          </form>
+
+
+
+                      </div>
+                      <div class="col-md-4">
+
+
+                        <b>Customer service:</b> <br />
+                        Phone: +1 129 209 291<br />
+                        E-mail: <a href="mailto:support@mysite.com">support@mysite.com</a><br />
+                        <br /><br />
+                        <b>Headquarter:</b><br />
+                        Company Inc, <br />
+                        Las vegas street 201<br />
+                        55001 Nevada, USA<br />
+                        Phone: +1 145 000 101<br />
+                        <a href="mailto:usa@mysite.com">usa@mysite.com</a><br />
+
+
+                        <br /><br />
+                        <b>Hong kong:</b><br />
+                        Company HK Litd, <br />
+                        25/F.168 Queen<br />
+                        Wan Chai District, Hong Kong<br />
+                        Phone: +852 129 209 291<br />
+                        <a href="mailto:hk@mysite.com">hk@mysite.com</a><br />
+
+
+                      </div>
+                    </div>
+
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/#bottom-->
+<!--/.body-inner-wrapper-->
+
+<!-- Modal card imports-->
+
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+    <script src='{% static 'js/bootstrap.min.js'%}'></script>
+
+    <script src='{% static 'js/waypoints.min.js'%}'></script>
+    <script src='{% static 'js/themehippo.js'%}'></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src='{% static 'js/script.js'%}'></script>
+
+</body>
+</html>

@@ -1,0 +1,677 @@
+{% extends "base.html" %}
+{% load static %}
+{% load mathfilters %}
+
+{% block content %}
+
+<div id="main-slider" class="no-margin">
+    <div class="carousel slide wet-asphalt">
+
+        <div class="carousel-inner">
+            <div class="item active" style="background-image: url('{% static 'images/womencasual.jpg'%}')">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="carousel-content centered">
+                                <h2 class="animation animated-item-1" style="color:white;background-color:black"> All Women's  <span> wear</span></h2>
+
+
+                                <br>
+								<span class="content-nav">
+									<a href="#services" class="animation animated-item-3">Go</a>
+								</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.item-->
+
+            <!--/.item-->
+            <div class="item" style="background-image: url('{% static 'images/heelmain.jpg'%}')">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="carousel-content center centered">
+                                <h2 class="animation animated-item-1"> Women's  <span>Heels</span></h2>
+                                <br>
+								<span class="content-nav">
+									<a href="#client" class="animation animated-item-3">Go</a>
+								</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.item-->
+            <div class="item" style="background-image: url('{% static 'images/womenmain.jpg'%}')">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="carousel-content center centered">
+                                <h2 class="animation animated-item-1"> Women's  <span>Smart Casual</span></h2>
+                                <br>
+								<span class="content-nav">
+									<a href="#services" class="animation animated-item-3">Go</a>
+								</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.item-->
+
+
+            <!--/.item-->
+        </div>
+        <!--/.carousel-inner-->
+    </div>
+    <!--/.carousel-->
+    <a class="prev hidden-xs rounded" href="#main-slider" data-slide="prev">
+        <i class="fa fa-angle-left"></i>
+    </a>
+    <a class="next hidden-xs rounded" href="#main-slider" data-slide="next">
+        <i class="fa fa-angle-right"></i>
+    </a>
+</div>
+<!--/#main-slider-->
+
+<div id="body-wrapper">
+
+
+
+<!-- Services
+================================================== -->
+
+    <div id="services"  >
+
+        <div class="inner-wrapper" style="background-color:bisque;">
+
+
+			<div class="container">
+
+
+        <section class="our-publication pt-100 pb-70">
+            <div class="container">
+                <div class="add-to-cart">
+              <button data-backdrop="false" type="button" class="default-btn" data-toggle="modal" data-target="#exampleModalCenter">Size guide </button>
+              </div>
+              <hr>
+                    <div class="row">
+                  {% for p in products %}
+
+                  {% if p.quantity > 0 and p.type == "Female"%}
+
+                  {% if p.category == "Slipper" %}
+                    <div class="col-sm-6 col-lg-3 ">
+                        <div class="single-publication" style="background-color:white">
+
+                            <figure>
+                                <a href="#">
+                                    <img class="img-fluid" src="{{p.image.url}}" style="display: block;max-width:100%;height: auto;"alt="Publication Image">
+                                </a>
+                                <ul>
+
+                                    <li><a data-backdrop="false" href="#" title="Quick View" data-toggle="modal" data-target="#{{p.product_id}}"><i class="fa fa-info-circle"></i></a></li>
+
+                                </ul>
+                            </figure>
+
+                            <div class="publication-content">
+
+                                <h3><a href="#"> {{p.name}} </a></h3>
+                                <br>
+
+
+                                <h4 class="price">£ {{p.unit_price}} <span> £ {{ p.unit_price|mul:1.25|floatformat:"0" }}</span></h4>
+                            </div>
+
+                            <div class="add-to-cart">
+                                <a href="{% url 'add_to_cart' product_id=p.product_id quantity=1 %}" class="default-btn" >Add to Cart</a>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="{{p.product_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body" >
+                            <div class="col-sm-6 col-lg-3 " style="width:200px">
+                                <div class="single-publication " style="background-color:white">
+
+                                    <figure>
+                                        <a href="#">
+                                            <img src="{{p.image.url}}" style="display: block;max-width:100%;height: auto;"alt="Publication Image">
+                                        </a>
+
+                                    </figure>
+
+                                    <div class="publication-content">
+                                      <br><br><br><br><br>
+                                        <h3><a href="#"> {{p.name}}</a></h3>
+                                        <br>
+                                        <h4 class="price">£ {{p.unit_price}} <span> £ {{ p.unit_price|mul:1.25|floatformat:"0" }}</span></h4>
+                                    </div>
+
+                                    <div class="add-to-cart">
+                                        <a href="#" class="default-btn" >Add to Cart</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-lg-3 " style="width:300px">
+                                <div class="single-publication " style="background-color:white">
+
+                                  <div class="card card-body">
+                                      <div class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
+
+                                          <div class="media-body">
+                                              <h6 class="media-title font-weight-semibold"> <a href="#" data-abc="true">{{p.name}}</a> </h6>
+                                              <ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
+                                                  <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Men</a></li>
+                                                  <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Shoes</a></li>
+                                              </ul>
+
+                                              <p class="mb-3" style="color:black">{{p.description}}</p>
+                                              <p class="mb-3" style="color:black"> <b> Color:</b> {{p.color}}</p>
+                                              <p class="mb-3" style="color:black"> <b> Size:</b> {{p.size}}</p>
+
+                                          </div>
+
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3 " style="width:300px">
+                                <div class="single-publication " style="background-color:white">
+
+                                  <div class="card card-body">
+                                      <div class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
+
+                                          <div class="media-body">
+                                              <h6 class="media-title font-weight-semibold"> <a href="#" data-abc="true">Delivery and Returns</a> </h6>
+
+
+
+                                              <p class="mb-3" style="color:black"> <b> £6.95</b> DPD Next Day Delivery (Order before 7pm)</p>
+                                              <p class="mb-3" style="color:black"> <b> FREE </b> Standard Delivery (Within 4 working days)</p>
+                                              <p class="mb-3" style="color:black"> <b> FREE </b> Collect Plus (Within 5 working days)</p>
+                                              <p class="mb-3" style="color:black"> <b> £5.95</b> Hermes Express Delivery (Within 2 working days)</p>
+                                              <p class="mb-3" style="color:black"> <b> FREE </b> Returns on all items</p>
+
+
+                                          </div>
+
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                   {% endif %}
+
+                    {% endif %}
+                    {% endfor %}
+
+                    <!-- Modal -->
+                    <div class="modal fade" style="width:50%" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <img class="img-fluid" src="{% static 'images/sizeguide.jpeg'%}" style="display: block;max-width:100%;height: auto;"alt="Publication Image">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                            <!-- Modal -->
+
+
+
+
+                </div>
+            </div>
+        </section>
+
+
+
+			</div>
+        </div>
+    </div>
+
+<!--/#services-->
+
+
+    <div id="client" >
+
+        <div class="inner-wrapper" style="background-color:lightpink" >
+
+          <div class="container">
+
+
+        <section class="our-publication pt-100 pb-70">
+            <div class="container">
+                <div class="add-to-cart">
+              <button data-backdrop="false" type="button" class="default-btn" data-toggle="modal" data-target="#exampleModalCenter">Size guide </button>
+              </div>
+              <hr>
+                    <div class="row">
+                  {% for p in products %}
+
+                  {% if p.quantity > 0 and p.type == "Female"%}
+
+                  {% if p.category == "Heel" %}
+                    <div class="col-sm-6 col-lg-3 ">
+                        <div class="single-publication" style="background-color:white">
+
+                            <figure>
+                                <a href="#">
+                                    <img class="img-fluid" src="{{p.image.url}}" style="display: block;max-width:100%;height: auto;"alt="Publication Image">
+                                </a>
+                                <ul>
+
+                                    <li><a data-backdrop="false" href="#" title="Quick View" data-toggle="modal" data-target="#{{p.product_id}}"><i class="fa fa-info-circle"></i></a></li>
+
+                                </ul>
+                            </figure>
+
+                            <div class="publication-content">
+
+                                <h3><a href="#"> {{p.name}} </a></h3>
+                                <br>
+
+
+                                <h4 class="price">£ {{p.unit_price}} <span> £ {{ p.unit_price|mul:1.25|floatformat:"0" }}</span></h4>
+                            </div>
+
+                            <div class="add-to-cart">
+                                <a href="{% url 'add_to_cart' product_id=p.product_id quantity=1 %}" class="default-btn" >Add to Cart</a>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="{{p.product_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body" >
+                            <div class="col-sm-6 col-lg-3 " style="width:200px">
+                                <div class="single-publication " style="background-color:white">
+
+                                    <figure>
+                                        <a href="#">
+                                            <img src="{{p.image.url}}" style="display: block;max-width:100%;height: auto;"alt="Publication Image">
+                                        </a>
+
+                                    </figure>
+
+                                    <div class="publication-content">
+                                      <br><br><br><br><br>
+                                        <h3><a href="#"> {{p.name}}</a></h3>
+                                        <br>
+                                        <h4 class="price">£ {{p.unit_price}} <span> £ {{ p.unit_price|mul:1.25|floatformat:"0" }}</span></h4>
+                                    </div>
+
+                                    <div class="add-to-cart">
+                                        <a href="#" class="default-btn" >Add to Cart</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-lg-3 " style="width:300px">
+                                <div class="single-publication " style="background-color:white">
+
+                                  <div class="card card-body">
+                                      <div class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
+
+                                          <div class="media-body">
+                                              <h6 class="media-title font-weight-semibold"> <a href="#" data-abc="true">{{p.name}}</a> </h6>
+                                              <ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
+                                                  <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Men</a></li>
+                                                  <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Shoes</a></li>
+                                              </ul>
+
+                                              <p class="mb-3" style="color:black">{{p.description}}</p>
+                                              <p class="mb-3" style="color:black"> <b> Color:</b> {{p.color}}</p>
+                                              <p class="mb-3" style="color:black"> <b> Size:</b> {{p.size}}</p>
+
+                                          </div>
+
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3 " style="width:300px">
+                                <div class="single-publication " style="background-color:white">
+
+                                  <div class="card card-body">
+                                      <div class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
+
+                                          <div class="media-body">
+                                              <h6 class="media-title font-weight-semibold"> <a href="#" data-abc="true">Delivery and Returns</a> </h6>
+
+
+
+                                              <p class="mb-3" style="color:black"> <b> £6.95</b> DPD Next Day Delivery (Order before 7pm)</p>
+                                              <p class="mb-3" style="color:black"> <b> FREE </b> Standard Delivery (Within 4 working days)</p>
+                                              <p class="mb-3" style="color:black"> <b> FREE </b> Collect Plus (Within 5 working days)</p>
+                                              <p class="mb-3" style="color:black"> <b> £5.95</b> Hermes Express Delivery (Within 2 working days)</p>
+                                              <p class="mb-3" style="color:black"> <b> FREE </b> Returns on all items</p>
+
+
+                                          </div>
+
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                   {% endif %}
+
+                    {% endif %}
+                    {% endfor %}
+
+                    <!-- Modal -->
+                    <div class="modal fade" style="width:50%" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <img class="img-fluid" src="{% static 'images/sizeguide.jpeg'%}" style="display: block;max-width:100%;height: auto;"alt="Publication Image">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                            <!-- Modal -->
+
+
+
+
+                </div>
+            </div>
+        </section>
+
+
+
+			</div>
+        </div>
+    </div>
+
+    <!--/#services-->
+
+<hr><br>
+        <div id="about" style="background-color:peru">
+
+            <div class="inner-wrapper" >
+
+
+              <div class="container">
+
+
+            <section class="our-publication pt-100 pb-70">
+                <div class="container">
+                    <div class="add-to-cart">
+                  <button data-backdrop="false" type="button" class="default-btn" data-toggle="modal" data-target="#exampleModalCenter">Size guide </button>
+                  </div>
+                  <hr>
+                        <div class="row">
+                      {% for p in products %}
+
+                      {% if p.quantity > 0 and p.type == "Female"%}
+
+                      {% if p.category == "Sport" %}
+                        <div class="col-sm-6 col-lg-3 ">
+                            <div class="single-publication" style="background-color:white">
+
+                                <figure>
+                                    <a href="#">
+                                        <img class="img-fluid" src="{{p.image.url}}" style="display: block;max-width:100%;height: auto;"alt="Publication Image">
+                                    </a>
+                                    <ul>
+
+                                        <li><a data-backdrop="false" href="#" title="Quick View" data-toggle="modal" data-target="#{{p.product_id}}"><i class="fa fa-info-circle"></i></a></li>
+
+                                    </ul>
+                                </figure>
+
+                                <div class="publication-content">
+
+                                    <h3><a href="#"> {{p.name}} </a></h3>
+                                    <br>
+
+
+                                    <h4 class="price">£ {{p.unit_price}} <span> £ {{ p.unit_price|mul:1.25|floatformat:"0" }}</span></h4>
+                                </div>
+
+                                <div class="add-to-cart">
+                                    <a href="{% url 'add_to_cart' product_id=p.product_id quantity=1 %}" class="default-btn" >Add to Cart</a>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="{{p.product_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body" >
+                                <div class="col-sm-6 col-lg-3 " style="width:200px">
+                                    <div class="single-publication " style="background-color:white">
+
+                                        <figure>
+                                            <a href="#">
+                                                <img src="{{p.image.url}}" style="display: block;max-width:100%;height: auto;"alt="Publication Image">
+                                            </a>
+
+                                        </figure>
+
+                                        <div class="publication-content">
+                                          <br><br><br><br><br>
+                                            <h3><a href="#"> {{p.name}}</a></h3>
+                                            <br>
+                                            <h4 class="price">£ {{p.unit_price}} <span> £ {{ p.unit_price|mul:1.25|floatformat:"0" }}</span></h4>
+                                        </div>
+
+                                        <div class="add-to-cart">
+                                            <a href="#" class="default-btn" >Add to Cart</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-3 " style="width:300px">
+                                    <div class="single-publication " style="background-color:white">
+
+                                      <div class="card card-body">
+                                          <div class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
+
+                                              <div class="media-body">
+                                                  <h6 class="media-title font-weight-semibold"> <a href="#" data-abc="true">{{p.name}}</a> </h6>
+                                                  <ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
+                                                      <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Men</a></li>
+                                                      <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Shoes</a></li>
+                                                  </ul>
+
+                                                  <p class="mb-3" style="color:black">{{p.description}}</p>
+                                                  <p class="mb-3" style="color:black"> <b> Color:</b> {{p.color}}</p>
+                                                  <p class="mb-3" style="color:black"> <b> Size:</b> {{p.size}}</p>
+
+                                              </div>
+
+                                          </div>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-3 " style="width:300px">
+                                    <div class="single-publication " style="background-color:white">
+
+                                      <div class="card card-body">
+                                          <div class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
+
+                                              <div class="media-body">
+                                                  <h6 class="media-title font-weight-semibold"> <a href="#" data-abc="true">Delivery and Returns</a> </h6>
+
+
+
+                                                  <p class="mb-3" style="color:black"> <b> £6.95</b> DPD Next Day Delivery (Order before 7pm)</p>
+                                                  <p class="mb-3" style="color:black"> <b> FREE </b> Standard Delivery (Within 4 working days)</p>
+                                                  <p class="mb-3" style="color:black"> <b> FREE </b> Collect Plus (Within 5 working days)</p>
+                                                  <p class="mb-3" style="color:black"> <b> £5.95</b> Hermes Express Delivery (Within 2 working days)</p>
+                                                  <p class="mb-3" style="color:black"> <b> FREE </b> Returns on all items</p>
+
+
+                                              </div>
+
+                                          </div>
+                                      </div>
+                                    </div>
+                                </div>
+
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                       {% endif %}
+
+                        {% endif %}
+                        {% endfor %}
+
+                        <!-- Modal -->
+                        <div class="modal fade" style="width:50%" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <img class="img-fluid" src="{% static 'images/sizeguide.jpeg'%}" style="display: block;max-width:100%;height: auto;"alt="Publication Image">
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                                <!-- Modal -->
+
+
+
+
+                    </div>
+                </div>
+            </section>
+
+
+
+    			</div>
+            </div>
+        </div>
+
+
+
+
+
+
+<script>
+
+
+//modal script
+  function change_image(image){
+
+var container = document.getElementById("main-image");
+
+container.src = image.src;
+}
+
+
+
+document.addEventListener("DOMContentLoaded", function(event) {
+
+
+
+
+
+
+
+});
+  </script>
+
+
+
+
+</div>
+<!--/.body-wrapper-->
+
+
+
+{% endblock %}

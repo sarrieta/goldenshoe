@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style> @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap'); body { background-color: #eeeeee; font-family: 'Open Sans', serif } .container { margin-top: 50px; margin-bottom: 50px } .card { position: relative; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; min-width: 0; word-wrap: break-word; background-color: #fff; background-clip: border-box; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.10rem } .card-header:first-child { border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0 } .card-header { padding: 0.75rem 1.25rem; margin-bottom: 0; background-color: #fff; border-bottom: 1px solid rgba(0, 0, 0, 0.1) } .track { position: relative; background-color: #ddd; height: 7px; display: -webkit-box; display: -ms-flexbox; display: flex; margin-bottom: 60px; margin-top: 50px } .track .step { -webkit-box-flex: 1; -ms-flex-positive: 1; flex-grow: 1; width: 25%; margin-top: -18px; text-align: center; position: relative } .track .step.active:before { background: #FF5722 } .track .step::before { height: 7px; position: absolute; content: ""; width: 100%; left: 0; top: 18px } .track .step.active .icon { background: #ee5435; color: #fff } .track .icon { display: inline-block; width: 40px; height: 40px; line-height: 40px; position: relative; border-radius: 100%; background: #ddd } .track .step.active .text { font-weight: 400; color: #000 } .track .text { display: block; margin-top: 7px } .itemside { position: relative; display: -webkit-box; display: -ms-flexbox; display: flex; width: 100% } .itemside .aside { position: relative; -ms-flex-negative: 0; flex-shrink: 0 } .img-sm { width: 80px; height: 80px; padding: 7px } ul.row, ul.row-sm { list-style: none; padding: 0 } .itemside .info { padding-left: 15px; padding-right: 7px } .itemside .title { display: block; margin-bottom: 5px; color: #212529 } p { margin-top: 0; margin-bottom: 1rem } .btn-warning { color: #ffffff; background-color: #ee5435; border-color: #ee5435; border-radius: 1px } .btn-warning:hover { color: #ffffff; background-color: #ff2b00; border-color: #ff2b00; border-radius: 1px }</style>
+
+<div id="main-slider" class="no-margin">
+    <div class="carousel slide wet-asphalt">
+        <!--
+        <ol class="carousel-indicators">
+            <li data-target="#main-slider" data-slide-to="0" class="active"></li>
+            <li data-target="#main-slider" data-slide-to="1"></li>
+            <li data-target="#main-slider" data-slide-to="2"></li>
+        </ol>
+
+        style="background-image: url('{% static 'images/logo.png'%}')"
+        -->
+        <div class="carousel-inner">
+            <div class="item active" style="background-image: url('{% static 'images/order.jpg'%}')">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="carousel-content centered">
+
+
+                                <h2 class="animation animated-item-2">Track your order below</h2>
+                                <br>
+								<span class="content-nav">
+									<a href="#portfolio-wrapper" class="animation animated-item-3">Go</a>
+								</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--/.item-->
+        </div>
+        <!--/.carousel-inner-->
+    </div>
+
+</div>
+<!--/#main-slider-->
+
+<div id="body-wrapper">
+
+
+
+
+
+<!-- Portfolio
+================================================== -->
+<div id="portfolio-wrapper">
+
+        <div class="inner-wrapper" style="background-color:white;">
+            <div class="row">
+              <div class="container" style="background-color:white;" >
+
+                <form id="orderIDInput" >
+                <div class="form-group" >
+                <br>
+                  <label for="exampleInputEmail1">Enter Order ID </label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                </div>
+
+
+                <div class="add-to-cart">
+              <button data-backdrop="false" type="button" class="default-btn" data-toggle="modal" data-target="#exampleModalCenter">Submit </button><br><hr>
+              </div>
+
+              </form>
+
+
+              </div>
+
+              <!-- modal2 -->
+
+              <div class="modal fade" style="width:50%" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <article class="card" >
+
+                        <div class="card-body" style="display:inline-block;padding-left:50px">
+
+                            <article class="container" >
+                                <div class="row">
+                                  <br>
+                                    <div class="col-sm-6"> <strong>Estimated Delivery time:</strong> <br>{{date2}} <br>
+                                      <hr style="width:50%;text-align:left;margin-left:0">
+                                    <strong>Shipping By:</strong> <br> Royal Mail Group Ltd, | <i class="fa fa-phone"></i> +0345 602 1021 <br>
+                                    <hr style="width:50%;text-align:left;margin-left:0">
+                                    <strong>Status:</strong> <br> Picked by the courier <br>
+                                    <hr style="width:50%;text-align:left;margin-left:0">
+                                    <strong>Tracking ID:</strong> <br> BD045903594059 <br>
+
+
+                                  </div>
+
+                                </div>
+                            </article>
+                            <div class="track">
+                                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order confirmed</span> </div>
+                                <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Picked by courier</span> </div>
+                                <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
+                                <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Ready for pickup</span> </div>
+                            </div>
+                            <hr>
+
+                            <hr>
+
+                        </div>
+                    </article>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                  </div>
+                </div>
+              </div>
+              </div>
+
+              <!-- modal2 -->
+
+              <!-- modal
+                <div id="trackingModal" class="container" style="display: ;">
+
+                  <article class="card" >
+
+                      <div class="card-body" style="display:inline-block;padding-left:50px">
+
+                          <article class="container" >
+                              <div class="row">
+                                <br>
+                                  <div class="col-sm-6"> <strong>Estimated Delivery time:</strong> <br>{{date2}}</div>
+                                  <div class="col-sm-6"> <strong>Shipping By:</strong> <br> Royal Mail Group Ltd, | <i class="fa fa-phone"></i> +0345 602 1021 </div>
+                                  <div class="col-sm-6"> <strong>Status:</strong> <br> Picked by the courier </div>
+                                  <div class="col-sm-6"> <strong>Tracking #:</strong> <br> BD045903594059 </div><br>
+                              </div>
+                          </article>
+                          <div class="track">
+                              <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order confirmed</span> </div>
+                              <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Picked by courier</span> </div>
+                              <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
+                              <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Ready for pickup</span> </div>
+                          </div>
+                          <hr>
+
+                          <hr>
+
+                      </div>
+                  </article>
+
+                </div>
+                modal -->
+            </div>
+        </div>
+
+</div>
+<!--/#portfolio-->
+
+
+
+
+
+
+
+</div>
+<!--/.body-wrapper-->
+
+
+
+
+{% endblock%}
